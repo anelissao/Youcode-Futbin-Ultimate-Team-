@@ -21,36 +21,43 @@ body {
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
 }
 
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: #ddd;
-  color: black;
+    background-color: #ddd;
+    color: black;
 }
 
 /* Add an active class to highlight the current page */
 .topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-  font-style: italic;
-  font-weight: bolder;
+    background-color: #04AA6D;
+    color: white;
+    font-style: italic;
+    font-weight: bolder;
 }
 
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
-  display: none;
+    display: none;
 }
 .logo-y {
-  color: blue;
+    color: blue;
+}
+
+body {
+  background: #EEE;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  line-height: 18px;
 }
 
 main {
@@ -67,17 +74,145 @@ main {
 main h1{
     color: white;
     margin-left: 2em;
+    padding: 0;
 }
 
 #pitch {
-    background-image: url("assets/images/soccer-field-background-vector.jpg"); /* The image used */
+    background-image: url("assets/images/stadium_background.webp"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
      /* You must set a specified height */
+    width: 80vw;
+
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
-    border: 1px solid red;
+    border: 2px solid blueviolet;
+    margin-left: 2em;
+    border-radius: 25px;
 }
+
+/* Color Variables */
+
+:root {
+    --base: hsl(240, 46%, 20%);
+    --accent: hsl(36, 100%, 50%);
+    --dark: hsl(240, 60%, 15%);
+    --copy: hsl(240, 30%, 60%);
+    --copy-highlight: #FFFFFF;
+  }
+  
+  /* General Card Styles */
+  .card {
+    background: var(--base);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    color: var(--copy);
+    display: flex;
+    width: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 2em;
+  }
+  
+  /* Card Aside Section */
+  .card-aside {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 5px 0;
+    width: 50px;
+  }
+  
+  .card-overall {
+    margin-bottom: 10px;
+  }
+  
+  .card-rating {
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+  }
+  
+  .card-team img {
+    margin: 0 5px 5px 5px;
+    max-height: 30px;
+    width: auto;
+  }
+  
+  .card-info {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-top: auto;
+  }
+  
+
+  #pitch {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  /* Card Main Section */
+  .card-main {
+    flex: 1;
+  }
+  
+  .card-header {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .card-image {
+    width: 50%;
+  }
+  
+  .card-name {
+    color: var(--accent);
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    line-height: 25px;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* Card Attributes */
+  .card-attributes {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    background: var(--dark);
+  }
+  
+  .card-attribute {
+    display: flex;
+    flex-basis: 50%;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+  }
+  
+  .card-attribute__value {
+    color: var(--copy-highlight);
+    flex-basis: 40%;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 3px;
+    text-align: right;
+  }
+  
+  /* General Body and Container Styles */
+  
+  img {
+    width: 100%;
+  }
+  
+
+
+
+
 
 /* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
 @media screen and (max-width: 600px) {

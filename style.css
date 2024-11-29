@@ -147,10 +147,7 @@ main h1{
   }
   
 
-  #pitch {
-    display: flex;
-    flex-wrap: wrap;
-  }
+  
   /* Card Main Section */
   .card-main {
     flex: 1;
@@ -237,3 +234,29 @@ main h1{
     text-align: left;
   }
 }
+
+#pitch {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  height: 600px;
+  border: 2px solid white;
+  margin: auto;
+  overflow: hidden;
+}
+
+.player {
+  position: absolute;
+  width: 200px;
+  height: 100px; /* Assuming player height */
+  background: rgba(128, 128, 128, 0.3);
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 14px;
+  color: black;
+  font-weight: bold;
+  color: white;
+  padding-top: 1.2em;
+}
+

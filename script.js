@@ -1,17 +1,57 @@
-/*fetch('http://localhost:3000/players')
+
+
+const pitch = document.getElementById("pitch");
+const pitchWidth = pitch.offsetWidth;
+const pitchHeight = pitch.offsetHeight;
+const playerWidth = 200; // Player card width
+const playerHeight = 50; // Player card height
+
+
+// Define player positions (percentage values)
+const positions = [
+  { x: 50, y: 90 }, // Goalkeeper
+  
+  { x: 15, y: 60 }, // Defender 1
+  { x: 40, y: 70 }, // Defender 2
+  { x: 60, y: 70 }, // Defender 3
+  { x: 85, y: 60 }, // Defender 4
+  
+  { x: 30, y: 35 }, // Midfielder 1
+  { x: 50, y: 50 }, // Midfielder 2
+  { x: 70, y: 35 }, // Midfielder 3
+  
+  { x: 25, y: 15 }, // Forward 1
+  { x: 50, y: 10 }, // Forward 2
+  { x: 75, y: 15 }, // Forward 3
+];
+
+// Position each player dynamically
+const players = document.querySelectorAll(".player");
+players.forEach((player, index) => {
+  const { x, y } = positions[index];
+  
+  // Calculate position offsets
+  const leftOffset = (pitchWidth * x) / 100 - playerWidth / 2;
+  const topOffset = (pitchHeight * y) / 100 - playerHeight / 2;
+  
+  // Apply calculated positions
+  player.style.left = `${leftOffset}px`;
+  player.style.top = `${topOffset}px`;
+});
+
+const container = document.getElementById('bench')[0]; // Assuming only one 'card' container exists
+
+fetch('http://localhost:3000/players')
   .then(response => response.json())
   .then(players => {
-    const container = document.getElementById('pitch')[0]; // Assuming only one 'card' container exists
     console.log(players);
 
     players.forEach(player => {
       const card = document.createElement('div');
       card.classList.add('player-card');
         console.log();
-        
-        
-      pitch.innerHTML += `
-        <div class="card">
+
+        let playersArr = [`<div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[1].RATING}</span>
@@ -59,9 +99,9 @@
             </div>
           </div>
         </div>
-
-
-                <div class="card">
+        `,
+        
+         `       <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[7].RATING}</span>
@@ -109,9 +149,9 @@
             </div>
           </div>
         </div>
-
-
-                <div class="card">
+        `,
+        
+         `       <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[6].RATING}</span>
@@ -159,9 +199,9 @@
             </div>
           </div>
         </div>
-
-
-                <div class="card">
+        `,
+        
+         `       <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[8].RATING}</span>
@@ -209,9 +249,9 @@
             </div>
           </div>
         </div>
-
-
-        <div class="card">
+        `,
+        
+        `<div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[414].RATING}</span>
@@ -259,9 +299,9 @@
             </div>
           </div>
         </div>
-
-
-        <div class="card">
+        `,
+        
+        `<div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[2063].RATING}</span>
@@ -309,9 +349,9 @@
             </div>
           </div>
         </div>
-
-
-        <div class="card">
+        `,
+        
+        `<div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[177].RATING}</span>
@@ -359,9 +399,9 @@
             </div>
           </div>
         </div>
-
-
-        <div class="card">
+        `,
+        
+        `<div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[3870].RATING}</span>
@@ -409,9 +449,9 @@
             </div>
           </div>
         </div>
-
-
-        <div class="card">
+        `,
+        
+        `<div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[7820].RATING}</span>
@@ -459,9 +499,9 @@
             </div>
           </div>
         </div>
-
-
-        <div class="card">
+        `,
+        
+        `<div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[69].RATING}</span>
@@ -509,48 +549,17 @@
             </div>
           </div>
         </div>
-      `;
+        `]
+          let playersArrLength = playersArr.length
+      
+      for(let i = 0; i < playersArrLength; i++){
+        bench.innerHTML += playersArr[i];
+      }  
 
       container.appendChild(card);
     });
   })
   .catch(error => console.error('Error fetching data:', error));
-*/
+  const playersDivs = document.querySelectorAll('#pitch .player');
 
-const pitch = document.getElementById("pitch");
-const pitchWidth = pitch.offsetWidth;
-const pitchHeight = pitch.offsetHeight;
-const playerWidth = 200; // Player card width
-const playerHeight = 50; // Player card height
-
-// Define player positions (percentage values)
-const positions = [
-  { x: 50, y: 90 }, // Goalkeeper
   
-  { x: 20, y: 70 }, // Defender 1
-  { x: 40, y: 70 }, // Defender 2
-  { x: 60, y: 70 }, // Defender 3
-  { x: 80, y: 70 }, // Defender 4
-
-  { x: 30, y: 50 }, // Midfielder 1
-  { x: 50, y: 50 }, // Midfielder 2
-  { x: 70, y: 50 }, // Midfielder 3
-
-  { x: 25, y: 30 }, // Forward 1
-  { x: 50, y: 30 }, // Forward 2
-  { x: 75, y: 30 }, // Forward 3
-];
-
-// Position each player dynamically
-const players = document.querySelectorAll(".player");
-players.forEach((player, index) => {
-  const { x, y } = positions[index];
-  
-  // Calculate position offsets
-  const leftOffset = (pitchWidth * x) / 100 - playerWidth / 2;
-  const topOffset = (pitchHeight * y) / 100 - playerHeight / 2;
-  
-  // Apply calculated positions
-  player.style.left = `${leftOffset}px`;
-  player.style.top = `${topOffset}px`;
-});

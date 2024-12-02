@@ -112,6 +112,12 @@ main h1{
     overflow: hidden;
     margin: 2em;
   }
+
+  .card:hover {
+    width: 220px;
+    border: 2px solid greenyellow;
+
+  }
   
   /* Card Aside Section */
   .card-aside {
@@ -258,5 +264,22 @@ main h1{
   font-weight: bold;
   color: white;
   padding-top: 1.2em;
+}
+
+.player:hover {
+  width: 240px;
+  height: 120px;
+  border: 4px solid rgb(16, 97, 220);
+  border-radius: 25px;
+}
+
+.selected {
+  border: 2px dotted red;
+  background-color: rgba(67, 61, 147, 0.3);
+}
+
+#bench {
+  display: flex;
+  flex-wrap: wrap;
 }
 

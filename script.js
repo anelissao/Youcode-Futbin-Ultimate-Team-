@@ -1,11 +1,12 @@
 
 
+const container = document.getElementById('bench'); // Assuming only one 'card' container exists
 const pitch = document.getElementById("pitch");
 const pitchWidth = pitch.offsetWidth;
 const pitchHeight = pitch.offsetHeight;
 const playerWidth = 200; // Player card width
 const playerHeight = 50; // Player card height
-
+let playersArr = []
 
 // Define player positions (percentage values)
 const positions = [
@@ -26,6 +27,7 @@ const positions = [
 ];
 
 // Position each player dynamically
+function setPos(){
 const players = document.querySelectorAll(".player");
 players.forEach((player, index) => {
   const { x, y } = positions[index];
@@ -38,20 +40,20 @@ players.forEach((player, index) => {
   player.style.left = `${leftOffset}px`;
   player.style.top = `${topOffset}px`;
 });
-
-const container = document.getElementById('bench')[0]; // Assuming only one 'card' container exists
+}
+setPos()
 
 fetch('http://localhost:3000/players')
-  .then(response => response.json())
-  .then(players => {
+.then(response => response.json())
+.then(players => {
     console.log(players);
 
-    players.forEach(player => {
+
       const card = document.createElement('div');
       card.classList.add('player-card');
         console.log();
 
-        let playersArr = [`<div class="card">
+        let playersArrTemp = [`<div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[1].RATING}</span>
@@ -550,16 +552,59 @@ fetch('http://localhost:3000/players')
           </div>
         </div>
         `]
-          let playersArrLength = playersArr.length
-      
-      for(let i = 0; i < playersArrLength; i++){
-        bench.innerHTML += playersArr[i];
-      }  
 
-      container.appendChild(card);
-    });
+        for(let i = 0; i < playersArrTemp.length; i++){
+          playersArr.push(playersArrTemp[i])
+        }
+          let playersArrLength = playersArr.length
+          console.log(playersArrLength)
+      for(let i = 0; i < playersArrLength; i++){
+        // console.log(playersArr[0]);
+        
+        container.innerHTML += playersArr[i];
+      }
+      // console.log(container) 
+      // container.appendChild(bench)
+      
+
+      
+
   })
   .catch(error => console.error('Error fetching data:', error));
-  const playersDivs = document.querySelectorAll('#pitch .player');
+  
 
+setTimeout(() => {
+
+
+    const cards = document.querySelectorAll('.card')
+  
+  console.log(cards.length);
+  
+    for (let i = 0; i < cards.length; i++) {
+      console.log(i);
+      
+      cards[i].addEventListener('click', (e)=> {
+        console.log(e.currentTarget.querySelector(".card-position").textContent);
+        let pos = e.currentTarget.querySelector(".card-position").textContent
+        //
+        const pitchPosition = document.querySelectorAll(`.${pos}`)
+        
+        for (let j = 0; j < pitchPosition.length; j++) {
+          pitchPosition[j].classList.add('selected');
+        }
+        for(let x = 0; x < pitchPosition.length; x++){
+          pitchPosition[x].addEventListener('click', (e)=> {
+            pitchPosition[x].replaceWith(cards[i])
+            for (let j = 0; j < pitchPosition.length; j++) {
+              pitchPosition[j].classList.remove('selected');
+            }
+            cards[i].classList.add('player')
+            playersArr.splice(i, 1)
+            setPos()
+          })
+        }
+        //
+      });
+    }
+}, 4000);
   

@@ -114,8 +114,8 @@ main h1{
   }
 
   .card:hover {
-    width: 220px;
-    border: 2px solid greenyellow;
+    
+    border: 4px solid violet;
 
   }
   
@@ -251,8 +251,7 @@ main h1{
   overflow: hidden;
 }
 
-.player {
-  position: absolute;
+.empty {
   width: 200px;
   height: 100px; /* Assuming player height */
   background: rgba(128, 128, 128, 0.3);
@@ -266,9 +265,14 @@ main h1{
   padding-top: 1.2em;
 }
 
+.player {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+}
+
 .player:hover {
-  width: 240px;
-  height: 120px;
+  
   border: 4px solid rgb(16, 97, 220);
   border-radius: 25px;
 }

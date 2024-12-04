@@ -10,20 +10,20 @@ let playersArr = []
 
 // Define player positions (percentage values)
 const positions = [
-  { x: 50, y: 90 }, // Goalkeeper
+  { x: 50, y: 85 }, // Goalkeeper
   
   { x: 15, y: 60 }, // Defender 1
-  { x: 40, y: 70 }, // Defender 2
-  { x: 60, y: 70 }, // Defender 3
+  { x: 37, y: 65 }, // Defender 2
+  { x: 62, y: 65 }, // Defender 3
   { x: 85, y: 60 }, // Defender 4
   
-  { x: 30, y: 35 }, // Midfielder 1
-  { x: 50, y: 50 }, // Midfielder 2
-  { x: 70, y: 35 }, // Midfielder 3
+  { x: 25, y: 35 }, // Midfielder 1
+  { x: 53, y: 40 }, // Midfielder 2
+  { x: 80, y: 35 }, // Midfielder 3
   
-  { x: 25, y: 15 }, // Forward 1
-  { x: 50, y: 10 }, // Forward 2
-  { x: 75, y: 15 }, // Forward 3
+  { x: 25, y: 10 }, // Forward 1
+  { x: 50, y: 5 }, // Forward 2
+  { x: 75, y: 10 }, // Forward 3
 ];
 
 // Position each player dynamically
@@ -56,11 +56,162 @@ fetch('http://localhost:3000/players')
         let playersArrTemp = [`<div class="card">
           <div class="card-aside">
             <div class="card-overall">
+              <span class="card-rating">${players[777].RATING}</span>
+              <span class="card-position">${players[777].POSITION}</span>
+            </div>
+            <div class="card-team">
+              <img class="card-club" src="${players[777].CLUB_IMAGE}" alt="retired">
+              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
+            </div>
+            <div class="card-info">
+              <span>${players[777].TIER}</span>
+            </div>
+          </div>
+          <div class="card-main">
+            <div class="card-header">
+              <div class="card-header-bg"></div>
+              <img class="card-image" src="${players[777].IMAGE}" alt="Player Image">
+            </div>
+            <h1 class="card-name">${players[777].NAME}</h1>
+            <div class="card-attributes">
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[777].PACE}</span>
+                <span class="card-attribute__name">PAC</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[777].DRIBBLING}</span>
+                <span class="card-attribute__name">DRI</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[777].SHOOTING}</span>
+                <span class="card-attribute__name">SHO</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[777].DEFENDING}</span>
+                <span class="card-attribute__name">DEF</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[777].PASSING}</span>
+                <span class="card-attribute__name">PAS</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[777].PHYSICAL}</span>
+                <span class="card-attribute__name">PHY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        `,
+
+
+        `<div class="card">
+          <div class="card-aside">
+            <div class="card-overall">
+              <span class="card-rating">${players[104].RATING}</span>
+              <span class="card-position">${players[104].POSITION}</span>
+            </div>
+            <div class="card-team">
+              <img class="card-club" src="${players[104].CLUB_IMAGE}" alt="retired">
+              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
+            </div>
+            <div class="card-info">
+              <span>${players[104].TIER}</span>
+            </div>
+          </div>
+          <div class="card-main">
+            <div class="card-header">
+              <div class="card-header-bg"></div>
+              <img class="card-image" src="${players[104].IMAGE}" alt="Player Image">
+            </div>
+            <h1 class="card-name">${players[104].NAME}</h1>
+            <div class="card-attributes">
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[104].PACE}</span>
+                <span class="card-attribute__name">PAC</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[104].DRIBBLING}</span>
+                <span class="card-attribute__name">DRI</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[104].SHOOTING}</span>
+                <span class="card-attribute__name">SHO</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[104].DEFENDING}</span>
+                <span class="card-attribute__name">DEF</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[104].PASSING}</span>
+                <span class="card-attribute__name">PAS</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[104].PHYSICAL}</span>
+                <span class="card-attribute__name">PHY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        `,
+
+        `<div class="card">
+          <div class="card-aside">
+            <div class="card-overall">
+              <span class="card-rating">${players[131].RATING}</span>
+              <span class="card-position">${players[131].POSITION}</span>
+            </div>
+            <div class="card-team">
+              <img class="card-club" src="${players[131].CLUB_IMAGE}" alt="retired">
+              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
+            </div>
+            <div class="card-info">
+              <span>${players[131].TIER}</span>
+            </div>
+          </div>
+          <div class="card-main">
+            <div class="card-header">
+              <div class="card-header-bg"></div>
+              <img class="card-image" src="${players[131].IMAGE}" alt="Player Image">
+            </div>
+            <h1 class="card-name">${players[131].NAME}</h1>
+            <div class="card-attributes">
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[131].PACE}</span>
+                <span class="card-attribute__name">PAC</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[131].DRIBBLING}</span>
+                <span class="card-attribute__name">DRI</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[131].SHOOTING}</span>
+                <span class="card-attribute__name">SHO</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[131].DEFENDING}</span>
+                <span class="card-attribute__name">DEF</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[131].PASSING}</span>
+                <span class="card-attribute__name">PAS</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[131].PHYSICAL}</span>
+                <span class="card-attribute__name">PHY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        `,
+
+        `<div class="card">
+          <div class="card-aside">
+            <div class="card-overall">
               <span class="card-rating">${players[1].RATING}</span>
               <span class="card-position">${players[1].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[1].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -110,7 +261,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[7].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[7].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -160,7 +311,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[6].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[6].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -202,6 +353,156 @@ fetch('http://localhost:3000/players')
           </div>
         </div>
         `,
+
+        `<div class="card">
+          <div class="card-aside">
+            <div class="card-overall">
+              <span class="card-rating">${players[6393].RATING}</span>
+              <span class="card-position">${players[6393].POSITION}</span>
+            </div>
+            <div class="card-team">
+              <img class="card-club" src="${players[6393].CLUB_IMAGE}" alt="retired">
+              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
+            </div>
+            <div class="card-info">
+              <span>${players[6393].TIER}</span>
+            </div>
+          </div>
+          <div class="card-main">
+            <div class="card-header">
+              <div class="card-header-bg"></div>
+              <img class="card-image" src="${players[6393].IMAGE}" alt="Player Image">
+            </div>
+            <h1 class="card-name">${players[6393].NAME}</h1>
+            <div class="card-attributes">
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[6393].PACE}</span>
+                <span class="card-attribute__name">PAC</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[6393].DRIBBLING}</span>
+                <span class="card-attribute__name">DRI</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[6393].SHOOTING}</span>
+                <span class="card-attribute__name">SHO</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[6393].DEFENDING}</span>
+                <span class="card-attribute__name">DEF</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[6393].PASSING}</span>
+                <span class="card-attribute__name">PAS</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[6393].PHYSICAL}</span>
+                <span class="card-attribute__name">PHY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        `,
+
+        `<div class="card">
+          <div class="card-aside">
+            <div class="card-overall">
+              <span class="card-rating">${players[13640].RATING}</span>
+              <span class="card-position">${players[13640].POSITION}</span>
+            </div>
+            <div class="card-team">
+              <img class="card-club" src="${players[13640].CLUB_IMAGE}" alt="retired">
+              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
+            </div>
+            <div class="card-info">
+              <span>${players[13640].TIER}</span>
+            </div>
+          </div>
+          <div class="card-main">
+            <div class="card-header">
+              <div class="card-header-bg"></div>
+              <img class="card-image" src="${players[13640].IMAGE}" alt="Player Image">
+            </div>
+            <h1 class="card-name">${players[13640].NAME}</h1>
+            <div class="card-attributes">
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13640].PACE}</span>
+                <span class="card-attribute__name">PAC</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13640].DRIBBLING}</span>
+                <span class="card-attribute__name">DRI</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13640].SHOOTING}</span>
+                <span class="card-attribute__name">SHO</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13640].DEFENDING}</span>
+                <span class="card-attribute__name">DEF</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13640].PASSING}</span>
+                <span class="card-attribute__name">PAS</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13640].PHYSICAL}</span>
+                <span class="card-attribute__name">PHY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        `,
+
+        `<div class="card">
+          <div class="card-aside">
+            <div class="card-overall">
+              <span class="card-rating">${players[13639].RATING}</span>
+              <span class="card-position">${players[13639].POSITION}</span>
+            </div>
+            <div class="card-team">
+              <img class="card-club" src="${players[13639].CLUB_IMAGE}" alt="retired">
+              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
+            </div>
+            <div class="card-info">
+              <span>${players[13639].TIER}</span>
+            </div>
+          </div>
+          <div class="card-main">
+            <div class="card-header">
+              <div class="card-header-bg"></div>
+              <img class="card-image" src="${players[13639].IMAGE}" alt="Player Image">
+            </div>
+            <h1 class="card-name">${players[13639].NAME}</h1>
+            <div class="card-attributes">
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13639].PACE}</span>
+                <span class="card-attribute__name">PAC</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13639].DRIBBLING}</span>
+                <span class="card-attribute__name">DRI</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13639].SHOOTING}</span>
+                <span class="card-attribute__name">SHO</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13639].DEFENDING}</span>
+                <span class="card-attribute__name">DEF</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13639].PASSING}</span>
+                <span class="card-attribute__name">PAS</span>
+              </div>
+              <div class="card-attribute">
+                <span class="card-attribute__value">${players[13639].PHYSICAL}</span>
+                <span class="card-attribute__name">PHY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        `,
         
          `       <div class="card">
           <div class="card-aside">
@@ -210,7 +511,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[8].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[8].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -260,7 +561,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[414].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[414].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -310,7 +611,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[2063].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[2063].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -360,7 +661,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[177].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[177].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -410,7 +711,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[3870].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[3870].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -460,7 +761,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[7820].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[7820].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -510,7 +811,7 @@ fetch('http://localhost:3000/players')
               <span class="card-position">${players[69].POSITION}</span>
             </div>
             <div class="card-team">
-              <img class="card-club" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/150px-Real_Madrid_CF.svg.png" alt="Club Logo">
+              <img class="card-club" src="${players[69].CLUB_IMAGE}" alt="retired">
               <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
             </div>
             <div class="card-info">
@@ -582,10 +883,12 @@ setTimeout(() => {
   
     for (let i = 0; i < cards.length; i++) {
       console.log(i);
+      let selected = false
       
       cards[i].addEventListener('click', (e)=> {
         console.log(e.currentTarget.querySelector(".card-position").textContent);
         let pos = e.currentTarget.querySelector(".card-position").textContent
+        
         //
         const pitchPosition = document.querySelectorAll(`.${pos}`)
         
@@ -594,17 +897,28 @@ setTimeout(() => {
         }
         for(let x = 0; x < pitchPosition.length; x++){
           pitchPosition[x].addEventListener('click', (e)=> {
+            if(selected){
+              return 0
+            }
             pitchPosition[x].replaceWith(cards[i])
             for (let j = 0; j < pitchPosition.length; j++) {
+              console.log(pitchPosition[i])
               pitchPosition[j].classList.remove('selected');
+              console.log(pitchPosition[i])
             }
             cards[i].classList.add('player')
             playersArr.splice(i, 1)
             setPos()
+            selected = true
+            
           })
+          
         }
         //
       });
+      if(selected){
+        break
+      }
     }
 }, 4000);
   

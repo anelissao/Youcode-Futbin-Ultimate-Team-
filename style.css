@@ -64,7 +64,7 @@ main {
     margin: 0;
     background-image: url("assets/images/bg.jpg"); /* The image used */
     background-color: #cccccc; /* Used if the image is unavailable */
-    height: 90vh; /* You must set a specified height */
+     /* You must set a specified height */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover; /* Resize the background image to cover the entire container */
@@ -167,6 +167,7 @@ main h1{
   
   .card-image {
     width: 50%;
+    height: 75px;
   }
   
   .card-name {
@@ -244,8 +245,8 @@ main h1{
 #pitch {
   position: relative;
   width: 100%;
-  max-width: 800px;
-  height: 600px;
+  max-width: 1000px;
+  height: 1000px;
   border: 2px solid white;
   margin: auto;
   overflow: hidden;
@@ -268,7 +269,7 @@ main h1{
 .player {
   position: absolute;
   width: 200px;
-  height: 100px;
+  height: 250px;
 }
 
 .player:hover {

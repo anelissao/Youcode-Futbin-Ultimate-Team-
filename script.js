@@ -53,7 +53,9 @@ fetch('http://localhost:3000/players')
       card.classList.add('player-card');
         console.log();
 
-        let playersArrTemp = [`<div class="card">
+        let playersArrTemp = [`
+          <div class="player-node">
+          <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[777].RATING}</span>
@@ -101,10 +103,20 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
 
 
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[104].RATING}</span>
@@ -152,9 +164,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
 
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[131].RATING}</span>
@@ -202,9 +224,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
 
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[1].RATING}</span>
@@ -252,9 +284,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-         `       <div class="card">
+         `<div class="player-node">
+         <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[7].RATING}</span>
@@ -302,9 +344,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-         `       <div class="card">
+         `<div class="player-node">
+               <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[6].RATING}</span>
@@ -352,9 +404,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
 
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[6393].RATING}</span>
@@ -402,9 +464,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
 
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[13640].RATING}</span>
@@ -452,9 +524,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
 
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[13639].RATING}</span>
@@ -502,9 +584,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-         `       <div class="card">
+         `<div class="player-node"> 
+               <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[8].RATING}</span>
@@ -552,9 +644,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[414].RATING}</span>
@@ -602,9 +704,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[2063].RATING}</span>
@@ -652,9 +764,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[177].RATING}</span>
@@ -702,9 +824,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[3870].RATING}</span>
@@ -752,9 +884,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[7820].RATING}</span>
@@ -802,9 +944,19 @@ fetch('http://localhost:3000/players')
             </div>
           </div>
         </div>
+        <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `,
         
-        `<div class="card">
+        `<div class="player-node">
+        <div class="card">
           <div class="card-aside">
             <div class="card-overall">
               <span class="card-rating">${players[69].RATING}</span>
@@ -851,7 +1003,16 @@ fetch('http://localhost:3000/players')
               </div>
             </div>
           </div>
-        </div>
+          </div>
+          <div class="btns">
+            <button class="e-btn">
+              Edit
+            </button>
+            <button class="d-btn">
+             Delete
+            </button>
+          </div>
+          </div>
         `]
 
         for(let i = 0; i < playersArrTemp.length; i++){
@@ -874,51 +1035,153 @@ fetch('http://localhost:3000/players')
   .catch(error => console.error('Error fetching data:', error));
   
 
-setTimeout(() => {
+  setTimeout(() => {
+    const cards = document.querySelectorAll('.card');
 
+    console.log(cards.length);
 
-    const cards = document.querySelectorAll('.card')
-  
-  console.log(cards.length);
-  
     for (let i = 0; i < cards.length; i++) {
-      console.log(i);
-      let selected = false
-      
-      cards[i].addEventListener('click', (e)=> {
-        console.log(e.currentTarget.querySelector(".card-position").textContent);
-        let pos = e.currentTarget.querySelector(".card-position").textContent
-        
-        //
-        const pitchPosition = document.querySelectorAll(`.${pos}`)
-        
-        for (let j = 0; j < pitchPosition.length; j++) {
-          pitchPosition[j].classList.add('selected');
-        }
-        for(let x = 0; x < pitchPosition.length; x++){
-          pitchPosition[x].addEventListener('click', (e)=> {
-            if(selected){
-              return 0
-            }
-            pitchPosition[x].replaceWith(cards[i])
+        console.log(i);
+        let selected = false;
+
+        cards[i].addEventListener('click', (e) => {
+            console.log(e.currentTarget.querySelector(".card-position").textContent);
+            let pos = e.currentTarget.querySelector(".card-position").textContent;
+
+            const pitchPosition = document.querySelectorAll(`.${pos}`);
+
             for (let j = 0; j < pitchPosition.length; j++) {
-              console.log(pitchPosition[i])
-              pitchPosition[j].classList.remove('selected');
-              console.log(pitchPosition[i])
+                pitchPosition[j].classList.add('selected');
             }
-            cards[i].classList.add('player')
-            playersArr.splice(i, 1)
-            setPos()
-            selected = true
-            
-          })
-          
+            for (let x = 0; x < pitchPosition.length; x++) {
+                pitchPosition[x].addEventListener('click', () => {
+                    if (selected) {
+                        return;
+                    }
+                    pitchPosition[x].replaceWith(cards[i]);
+                    for (let j = 0; j < pitchPosition.length; j++) {
+                        pitchPosition[j].classList.remove('selected');
+                    }
+                    cards[i].classList.add('player');
+                    playersArr.splice(i, 1);
+                    setPos();
+                    selected = true;
+                });
+            }
+        });
+
+        if (selected) {
+            break;
         }
-        //
-      });
-      if(selected){
-        break
-      }
+    }
+
+    const Dbtns = document.querySelectorAll(".d-btn");
+    console.log(Dbtns);
+    const playersNode = document.querySelectorAll(".player-node");
+
+    for (let k = 0; k < Dbtns.length; k++) {
+        Dbtns[k].addEventListener('click', () => {
+            playersArr.splice(k, 1);
+            playersNode[k].innerHTML = "";
+            console.log('L');
+        });
+    }
+
+    const Ebtns = document.querySelectorAll(".e-btn");
+    for (let i = 0; i < Ebtns.length; i++) {
+        Ebtns[i].addEventListener('click', () => {
+            const form = document.getElementById("form");
+            form.innerHTML = `
+            <form id="playerForm">
+                <label for="name">NAME:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="club">CLUB:</label>
+                <input type="text" id="club" name="club" required>
+
+                <label for="league">LEAGUE:</label>
+                <input type="text" id="league" name="league" required>
+
+                <label for="position">POSITION:</label>
+                <input type="text" id="position" name="position" required>
+
+                <label for="tier">TIER:</label>
+                <input type="text" id="tier" name="tier" required>
+
+                <label for="rating">RATING:</label>
+                <input type="number" id="rating" name="rating" required>
+
+                <label for="pace">PACE:</label>
+                <input type="number" id="pace" name="pace" required>
+
+                <label for="shooting">SHOOTING:</label>
+                <input type="number" id="shooting" name="shooting" required>
+
+                <label for="passing">PASSING:</label>
+                <input type="number" id="passing" name="passing" required>
+
+                <label for="dribbling">DRIBBLING:</label>
+                <input type="number" id="dribbling" name="dribbling" required>
+
+                <label for="defending">DEFENDING:</label>
+                <input type="number" id="defending" name="defending" required>
+
+                <label for="physical">PHYSICAL:</label>
+                <input type="number" id="physical" name="physical" required>
+
+                <label for="image">IMAGE (URL):</label>
+                <input type="url" id="image" name="image" required>
+
+                <label for="clubImage">CLUB_IMAGE (URL):</label>
+                <input type="url" id="clubImage" name="clubImage" required>
+
+                <button type="submit" id="submitBtn">Submit</button>
+            </form>
+            `;
+
+            const playerForm = document.getElementById('playerForm');
+            playerForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const formData = {
+                    NAME: playerForm.name.value,
+                    CLUB: playerForm.club.value,
+                    LEAGUE: playerForm.league.value,
+                    POSITION: playerForm.position.value,
+                    TIER: playerForm.tier.value,
+                    RATING: playerForm.rating.value,
+                    PACE: playerForm.pace.value,
+                    SHOOTING: playerForm.shooting.value,
+                    PASSING: playerForm.passing.value,
+                    DRIBBLING: playerForm.dribbling.value,
+                    DEFENDING: playerForm.defending.value,
+                    PHYSICAL: playerForm.physical.value,
+                    IMAGE: playerForm.image.value,
+                    CLUB_IMAGE: playerForm.clubImage.value,
+                };
+
+                const playerHTML = `
+                <div class="player-node">
+                    <div class="card">
+                        <div class="card-aside">
+                            <div class="card-overall">
+                                <span class="card-rating">${formData.RATING}</span>
+                                <span class="card-position">${formData.POSITION}</span>
+                            </div>
+                            <div class="card-team">
+                                <img class="card-club" src="${formData.CLUB_IMAGE}" alt="Club">
+                            </div>
+                        </div>
+                        <div class="card-main">
+                            <h1 class="card-name">${formData.NAME}</h1>
+                        </div>
+                    </div>
+                </div>
+                `;
+                console.log(playerHTML);
+                playersArr.splice(i, 1)
+                container.innerHTML += playerHTML
+            });
+        });
     }
 }, 4000);
-  

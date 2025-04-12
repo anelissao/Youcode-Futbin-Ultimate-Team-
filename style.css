@@ -292,6 +292,8 @@ main h1{
 .btns {
   text-align: center;
   margin-top: 0.3em;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .btns > * {
@@ -305,10 +307,28 @@ main h1{
 .e-btn{
   background-color : lightgreen;
   margin-right: 1em;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  background: #e9cc74;
+  color: #333;
 }
 
 .d-btn{
   background-color: rgb(215, 76, 76);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  background: #ff4444;
+  color: white;
+}
+
+.e-btn:hover, .d-btn:hover {
+  transform: scale(1.05);
 }
 
 #form {
@@ -334,4 +354,25 @@ form button {
   background-color: lightblue;
   border: none;
   cursor: pointer;
+}
+
+.text-shadow-lg {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.player-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.leading-tight {
+    line-height: 1.25;
 }

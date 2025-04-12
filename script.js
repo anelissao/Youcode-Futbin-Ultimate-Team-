@@ -1,5 +1,3 @@
-
-
 const container = document.getElementById('bench'); // Assuming only one 'card' container exists
 const pitch = document.getElementById("pitch");
 const pitchWidth = pitch.offsetWidth;
@@ -55,964 +53,1060 @@ fetch('http://localhost:3000/players')
 
         let playersArrTemp = [`
           <div class="player-node">
-          <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[777].RATING}</span>
-              <span class="card-position">${players[777].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[777].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[777].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[777].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[777].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[777].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
+          <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+              <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                  <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                      <div class="text-[0.9rem] mt-2 card-rating">${players[777].RATING}</div>
+                      <div class="text-[0.8rem] card-position">${players[777].POSITION}</div>
+                      <div class="block my-[0.2rem_0]">
+                          <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                      </div>
+                      <div class="block">
+                          <img src="${players[777].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                      </div>
+                  </div>
+                  <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                      <img src="${players[777].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                      <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                          <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                          <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                      </div>
+                  </div>
+              </div>
+              <div class="relative">
+                  <div class="text-[#e9cc74] w-[80%] mx-auto">
+                      <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                          <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[777].NAME}</span>
+                      </div>
+                      <div class="flex justify-center mt-[0.2rem]">
+                          <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                              <div class="flex items-center text-[0.7rem] uppercase">
+                                  <span class="font-bold mr-[0.2rem]">${players[777].PACE}</span>
+                                  <span class="font-light">PAC</span>
+                              </div>
+                              <div class="flex items-center text-[0.7rem] uppercase">
+                                  <span class="font-bold mr-[0.2rem]">${players[777].SHOOTING}</span>
+                                  <span class="font-light">SHO</span>
+                              </div>
+                              <div class="flex items-center text-[0.7rem] uppercase">
+                                  <span class="font-bold mr-[0.2rem]">${players[777].PASSING}</span>
+                                  <span class="font-light">PAS</span>
+                              </div>
+                          </div>
+                          <div>
+                              <div class="flex items-center text-[0.7rem] uppercase">
+                                  <span class="font-bold mr-[0.2rem]">${players[777].DRIBBLING}</span>
+                                  <span class="font-light">DRI</span>
+                              </div>
+                              <div class="flex items-center text-[0.7rem] uppercase">
+                                  <span class="font-bold mr-[0.2rem]">${players[777].DEFENDING}</span>
+                                  <span class="font-light">DEF</span>
+                              </div>
+                              <div class="flex items-center text-[0.7rem] uppercase">
+                                  <span class="font-bold mr-[0.2rem]">${players[777].PHYSICAL}</span>
+                                  <span class="font-light">PHY</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[777].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[777].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[777].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[777].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[777].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-
-
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[104].RATING}</span>
-              <span class="card-position">${players[104].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[104].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[104].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[104].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[104].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[104].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[104].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[104].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[104].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[104].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[104].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[131].RATING}</span>
-              <span class="card-position">${players[131].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[131].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[131].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[131].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[131].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[131].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[131].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[131].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[131].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[131].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[131].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[1].RATING}</span>
-              <span class="card-position">${players[1].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[1].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[1].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[1].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[1].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[1].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[1].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[1].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[1].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[1].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[1].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-         `<div class="player-node">
-         <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[7].RATING}</span>
-              <span class="card-position">${players[7].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[7].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[7].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[7].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[7].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-         `<div class="player-node">
-               <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[6].RATING}</span>
-              <span class="card-position">${players[6].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[6].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[6].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[6].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[6].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[6393].RATING}</span>
-              <span class="card-position">${players[6393].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[6393].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[6393].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[6393].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[6393].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6393].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6393].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6393].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6393].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6393].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[6393].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[13640].RATING}</span>
-              <span class="card-position">${players[13640].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[13640].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[13640].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[13640].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[13640].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13640].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13640].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13640].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13640].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13640].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13640].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[13639].RATING}</span>
-              <span class="card-position">${players[13639].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[13639].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[13639].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[13639].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[13639].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13639].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13639].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13639].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13639].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13639].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[13639].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-         `<div class="player-node"> 
-               <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[8].RATING}</span>
-              <span class="card-position">${players[8].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[8].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[8].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[8].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[8].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[8].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[8].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[8].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[8].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[8].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[8].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[414].RATING}</span>
-              <span class="card-position">${players[414].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[414].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[414].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[414].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[414].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[414].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[414].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[414].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[414].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[414].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[414].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[2063].RATING}</span>
-              <span class="card-position">${players[2063].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[2063].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[2063].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[2063].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[2063].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[2063].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[2063].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[2063].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[2063].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[2063].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[2063].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[177].RATING}</span>
-              <span class="card-position">${players[177].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[177].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[177].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[177].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[177].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[177].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[177].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[177].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[177].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[177].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[177].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[3870].RATING}</span>
-              <span class="card-position">${players[3870].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[3870].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[3870].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[3870].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[3870].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[3870].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[3870].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[3870].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[3870].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[3870].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[3870].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[7820].RATING}</span>
-              <span class="card-position">${players[7820].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[7820].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[7820].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[7820].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[7820].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7820].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7820].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7820].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7820].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7820].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[7820].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
-          </div>
-          </div>
-        `,
-        
-        `<div class="player-node">
-        <div class="card">
-          <div class="card-aside">
-            <div class="card-overall">
-              <span class="card-rating">${players[69].RATING}</span>
-              <span class="card-position">${players[69].POSITION}</span>
-            </div>
-            <div class="card-team">
-              <img class="card-club" src="${players[69].CLUB_IMAGE}" alt="retired">
-              <img class="card-national" src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag">
-            </div>
-            <div class="card-info">
-              <span>${players[69].TIER}</span>
-            </div>
-          </div>
-          <div class="card-main">
-            <div class="card-header">
-              <div class="card-header-bg"></div>
-              <img class="card-image" src="${players[69].IMAGE}" alt="Player Image">
-            </div>
-            <h1 class="card-name">${players[69].NAME}</h1>
-            <div class="card-attributes">
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[69].PACE}</span>
-                <span class="card-attribute__name">PAC</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[69].DRIBBLING}</span>
-                <span class="card-attribute__name">DRI</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[69].SHOOTING}</span>
-                <span class="card-attribute__name">SHO</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[69].DEFENDING}</span>
-                <span class="card-attribute__name">DEF</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[69].PASSING}</span>
-                <span class="card-attribute__name">PAS</span>
-              </div>
-              <div class="card-attribute">
-                <span class="card-attribute__value">${players[69].PHYSICAL}</span>
-                <span class="card-attribute__name">PHY</span>
-              </div>
-            </div>
-          </div>
           </div>
           <div class="btns">
-            <button class="e-btn">
-              Edit
-            </button>
-            <button class="d-btn">
-             Delete
-            </button>
+              <button class="e-btn">Edit</button>
+              <button class="d-btn">Delete</button>
           </div>
-          </div>
+      </div>
+        `,
+
+
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[104].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[104].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[104].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[104].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[104].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[104].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[104].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[104].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[104].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[104].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[104].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[131].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[131].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[131].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[131].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[131].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[131].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[131].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[131].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[131].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[131].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[131].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[1].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[1].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[1].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[1].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[1].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[1].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[1].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[1].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[1].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[1].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[1].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+        
+         `<div class="player-node">
+         <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+             <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                 <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                     <div class="text-[0.9rem] mt-2 card-rating">${players[7].RATING}</div>
+                     <div class="text-[0.8rem] card-position">${players[7].POSITION}</div>
+                     <div class="block my-[0.2rem_0]">
+                         <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                     </div>
+                     <div class="block">
+                         <img src="${players[7].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                     </div>
+                 </div>
+                 <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                     <img src="${players[7].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                     <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                         <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                         <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="relative">
+                 <div class="text-[#e9cc74] w-[80%] mx-auto">
+                     <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                         <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[7].NAME}</span>
+                     </div>
+                     <div class="flex justify-center mt-[0.2rem]">
+                         <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[7].PACE}</span>
+                                 <span class="font-light">PAC</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[7].SHOOTING}</span>
+                                 <span class="font-light">SHO</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[7].PASSING}</span>
+                                 <span class="font-light">PAS</span>
+                             </div>
+                         </div>
+                         <div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[7].DRIBBLING}</span>
+                                 <span class="font-light">DRI</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[7].DEFENDING}</span>
+                                 <span class="font-light">DEF</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[7].PHYSICAL}</span>
+                                 <span class="font-light">PHY</span>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="btns">
+             <button class="e-btn">Edit</button>
+             <button class="d-btn">Delete</button>
+         </div>
+     </div>
+        `,
+        
+         `<div class="player-node">
+         <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+             <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                 <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                     <div class="text-[0.9rem] mt-2 card-rating">${players[6].RATING}</div>
+                     <div class="text-[0.8rem] card-position">${players[6].POSITION}</div>
+                     <div class="block my-[0.2rem_0]">
+                         <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                     </div>
+                     <div class="block">
+                         <img src="${players[6].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                     </div>
+                 </div>
+                 <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                     <img src="${players[6].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                     <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                         <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                         <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="relative">
+                 <div class="text-[#e9cc74] w-[80%] mx-auto">
+                     <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                         <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[6].NAME}</span>
+                     </div>
+                     <div class="flex justify-center mt-[0.2rem]">
+                         <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[6].PACE}</span>
+                                 <span class="font-light">PAC</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[6].SHOOTING}</span>
+                                 <span class="font-light">SHO</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[6].PASSING}</span>
+                                 <span class="font-light">PAS</span>
+                             </div>
+                         </div>
+                         <div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[6].DRIBBLING}</span>
+                                 <span class="font-light">DRI</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[6].DEFENDING}</span>
+                                 <span class="font-light">DEF</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[6].PHYSICAL}</span>
+                                 <span class="font-light">PHY</span>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="btns">
+             <button class="e-btn">Edit</button>
+             <button class="d-btn">Delete</button>
+         </div>
+     </div>
+        `,
+
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[6393].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[6393].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[6393].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[6393].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[6393].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[6393].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[6393].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[6393].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[6393].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[6393].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[6393].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[13640].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[13640].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[13640].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[13640].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[13640].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13640].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13640].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13640].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13640].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13640].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13640].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[13639].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[13639].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[13639].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[13639].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[13639].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13639].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13639].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13639].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13639].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13639].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[13639].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+        
+         `<div class="player-node">
+         <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+             <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                 <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                     <div class="text-[0.9rem] mt-2 card-rating">${players[8].RATING}</div>
+                     <div class="text-[0.8rem] card-position">${players[8].POSITION}</div>
+                     <div class="block my-[0.2rem_0]">
+                         <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                     </div>
+                     <div class="block">
+                         <img src="${players[8].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                     </div>
+                 </div>
+                 <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                     <img src="${players[8].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                     <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                         <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                         <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                     </div>
+                 </div>
+             </div>
+             <div class="relative">
+                 <div class="text-[#e9cc74] w-[80%] mx-auto">
+                     <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                         <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[8].NAME}</span>
+                     </div>
+                     <div class="flex justify-center mt-[0.2rem]">
+                         <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[8].PACE}</span>
+                                 <span class="font-light">PAC</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[8].SHOOTING}</span>
+                                 <span class="font-light">SHO</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[8].PASSING}</span>
+                                 <span class="font-light">PAS</span>
+                             </div>
+                         </div>
+                         <div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[8].DRIBBLING}</span>
+                                 <span class="font-light">DRI</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[8].DEFENDING}</span>
+                                 <span class="font-light">DEF</span>
+                             </div>
+                             <div class="flex items-center text-[0.7rem] uppercase">
+                                 <span class="font-bold mr-[0.2rem]">${players[8].PHYSICAL}</span>
+                                 <span class="font-light">PHY</span>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <div class="btns">
+             <button class="e-btn">Edit</button>
+             <button class="d-btn">Delete</button>
+         </div>
+     </div>
+        `,
+        
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[414].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[414].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[414].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[414].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[414].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[414].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[414].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[414].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[414].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[414].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[414].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+        
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[2063].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[2063].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[2063].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[2063].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[2063].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[2063].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[2063].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[2063].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[2063].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[2063].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[2063].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+        
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[177].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[177].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[177].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[177].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[177].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[177].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[177].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[177].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[177].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[177].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[177].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+        
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[3870].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[3870].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[3870].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[3870].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[3870].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[3870].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[3870].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[3870].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[3870].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[3870].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[3870].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+        
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[7820].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[7820].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[7820].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[7820].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[7820].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[7820].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[7820].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[7820].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[7820].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[7820].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[7820].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
+        `,
+        
+        `<div class="player-node">
+        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                    <div class="text-[0.9rem] mt-2 card-rating">${players[69].RATING}</div>
+                    <div class="text-[0.8rem] card-position">${players[69].POSITION}</div>
+                    <div class="block my-[0.2rem_0]">
+                        <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                    </div>
+                    <div class="block">
+                        <img src="${players[69].CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                    </div>
+                </div>
+                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                    <img src="${players[69].IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                    </div>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${players[69].NAME}</span>
+                    </div>
+                    <div class="flex justify-center mt-[0.2rem]">
+                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[69].PACE}</span>
+                                <span class="font-light">PAC</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[69].SHOOTING}</span>
+                                <span class="font-light">SHO</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[69].PASSING}</span>
+                                <span class="font-light">PAS</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[69].DRIBBLING}</span>
+                                <span class="font-light">DRI</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[69].DEFENDING}</span>
+                                <span class="font-light">DEF</span>
+                            </div>
+                            <div class="flex items-center text-[0.7rem] uppercase">
+                                <span class="font-bold mr-[0.2rem]">${players[69].PHYSICAL}</span>
+                                <span class="font-light">PHY</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btns">
+            <button class="e-btn">Edit</button>
+            <button class="d-btn">Delete</button>
+        </div>
+    </div>
         `]
 
         for(let i = 0; i < playersArrTemp.length; i++){
@@ -1162,19 +1256,69 @@ fetch('http://localhost:3000/players')
 
                 const playerHTML = `
                 <div class="player-node">
-                    <div class="card">
-                        <div class="card-aside">
-                            <div class="card-overall">
-                                <span class="card-rating">${formData.RATING}</span>
-                                <span class="card-position">${formData.POSITION}</span>
+                    <div class="relative flex items-center justify-center">
+                        <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+                            <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                                <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                                    <div class="text-[0.9rem] mt-2">${formData.RATING}</div>
+                                    <div class="text-[0.8rem]">${formData.POSITION}</div>
+                                    <div class="block my-[0.2rem_0]">
+                                        <img src="https://selimdoyranli.com/cdn/fut-player-card/img/argentina.svg" alt="Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                                    </div>
+                                    <div class="block">
+                                        <img src="${formData.CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain" />
+                                    </div>
+                                </div>
+                                <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                                    <img src="${formData.IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                                    <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                                        <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                                        <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-team">
-                                <img class="card-club" src="${formData.CLUB_IMAGE}" alt="Club">
+                            <div class="relative">
+                                <div class="text-[#e9cc74] w-[80%] mx-auto">
+                                    <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${formData.NAME}</span>
+                                    </div>
+                                    <div class="flex justify-center mt-[0.2rem]">
+                                        <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                                            <div class="flex items-center text-[0.7rem] uppercase">
+                                                <span class="font-bold mr-[0.2rem]">${formData.PACE}</span>
+                                                <span class="font-light">PAC</span>
+                                            </div>
+                                            <div class="flex items-center text-[0.7rem] uppercase">
+                                                <span class="font-bold mr-[0.2rem]">${formData.SHOOTING}</span>
+                                                <span class="font-light">SHO</span>
+                                            </div>
+                                            <div class="flex items-center text-[0.7rem] uppercase">
+                                                <span class="font-bold mr-[0.2rem]">${formData.PASSING}</span>
+                                                <span class="font-light">PAS</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="flex items-center text-[0.7rem] uppercase">
+                                                <span class="font-bold mr-[0.2rem]">${formData.DRIBBLING}</span>
+                                                <span class="font-light">DRI</span>
+                                            </div>
+                                            <div class="flex items-center text-[0.7rem] uppercase">
+                                                <span class="font-bold mr-[0.2rem]">${formData.DEFENDING}</span>
+                                                <span class="font-light">DEF</span>
+                                            </div>
+                                            <div class="flex items-center text-[0.7rem] uppercase">
+                                                <span class="font-bold mr-[0.2rem]">${formData.PHYSICAL}</span>
+                                                <span class="font-light">PHY</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-main">
-                            <h1 class="card-name">${formData.NAME}</h1>
-                        </div>
+                    </div>
+                    <div class="btns">
+                        <button class="e-btn">Edit</button>
+                        <button class="d-btn">Delete</button>
                     </div>
                 </div>
                 `;

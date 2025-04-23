@@ -1330,6 +1330,30 @@ fetch('http://localhost:3000/players')
     }
 }, 4000);
 
+// Notification system
+function showNotification(message, type = 'error') {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+  
+  // Add to DOM
+  document.body.appendChild(notification);
+  
+  // Animate in
+  setTimeout(() => {
+    notification.classList.add('visible');
+  }, 10);
+  
+  // Auto remove after delay
+  setTimeout(() => {
+    notification.classList.remove('visible');
+    setTimeout(() => {
+      notification.remove();
+    }, 500); // Wait for fade out animation
+  }, 3000);
+}
+
 // Drag and Drop functionality
 setTimeout(() => {
   // Function to make an element draggable
@@ -1380,6 +1404,8 @@ setTimeout(() => {
       if (isValidPosition) {
         e.preventDefault();
         position.classList.add('drag-over');
+      } else {
+        position.classList.add('invalid-position');
       }
     });
     
@@ -1394,18 +1420,22 @@ setTimeout(() => {
       if (isValidPosition) {
         e.preventDefault();
         position.classList.add('drag-over');
+      } else {
+        position.classList.add('invalid-position');
       }
     });
     
     // Remove visual feedback when leaving
     position.addEventListener('dragleave', function() {
       position.classList.remove('drag-over');
+      position.classList.remove('invalid-position');
     });
     
     // Handle the drop event
     position.addEventListener('drop', function(e) {
       e.preventDefault();
       position.classList.remove('drag-over');
+      position.classList.remove('invalid-position');
       
       // Get the dragged player data and position
       const playerData = e.dataTransfer.getData('text/plain');
@@ -1419,6 +1449,7 @@ setTimeout(() => {
       
       if (!isValidPosition) {
         console.log(`Invalid position! ${draggedPosition} cannot be placed in ${validPositions.join(', ')}`);
+        showNotification(`Invalid position! ${draggedPosition} players cannot play in the ${validPositions.join('/')} position.`, 'error');
         return;
       }
       
@@ -1477,8 +1508,14 @@ setTimeout(() => {
                                position.getAttribute('data-position').includes('8') ? 'Forward 1' : 
                                position.getAttribute('data-position').includes('9') ? 'Forward 2' : 'Forward 3';
           position.className = positionClasses + ' empty';
+          
+          // Show notification
+          showNotification('Player removed from position', 'success');
         });
         droppedPlayer.appendChild(removeBtn);
+        
+        // Show success notification
+        showNotification(`Player successfully placed in ${validPositions[0]} position!`, 'success');
       }
       
       console.log(`Player placed at position ${position.getAttribute('data-position')}`);
@@ -1490,6 +1527,12 @@ setTimeout(() => {
     // Clean up any leftover elements marked for moving
     document.querySelectorAll('[data-being-moved="true"]').forEach(el => {
       el.removeAttribute('data-being-moved');
+    });
+    
+    // Clean up any lingering visual feedback
+    document.querySelectorAll('.drag-over, .invalid-position').forEach(el => {
+      el.classList.remove('drag-over');
+      el.classList.remove('invalid-position');
     });
   });
 }, 5000); // Use timeout to ensure elements are loaded
@@ -1523,6 +1566,39 @@ style.textContent = `
   
   .remove-btn:hover {
     background-color: #cc0000;
+  }
+  
+  /* Notification styles */
+  .notification {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.5s ease;
+  }
+  
+  .notification.visible {
+    top: 20px;
+    opacity: 1;
+  }
+  
+  .notification.error {
+    background-color: #ff4444;
+  }
+  
+  .notification.success {
+    background-color: #4CAF50;
+  }
+  
+  .notification.warning {
+    background-color: #ff9800;
   }
 `;
 document.head.appendChild(style);

@@ -1329,3 +1329,110 @@ fetch('http://localhost:3000/players')
         });
     }
 }, 4000);
+
+// Drag and Drop functionality
+setTimeout(() => {
+  // Get all player elements from bench
+  const benchPlayers = document.querySelectorAll('#bench .player-node');
+  const emptyPositions = document.querySelectorAll('#pitch .player.empty');
+  
+  // Make bench players draggable
+  benchPlayers.forEach(player => {
+    player.setAttribute('draggable', 'true');
+    
+    player.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', player.outerHTML);
+      e.dataTransfer.effectAllowed = 'move';
+    });
+  });
+  
+  // Setup drop targets on the pitch
+  emptyPositions.forEach(position => {
+    // Allow drop by preventing default behavior
+    position.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      position.classList.add('drag-over');
+    });
+    
+    // Visual feedback when dragging over
+    position.addEventListener('dragenter', function(e) {
+      e.preventDefault();
+      position.classList.add('drag-over');
+    });
+    
+    // Remove visual feedback when leaving
+    position.addEventListener('dragleave', function() {
+      position.classList.remove('drag-over');
+    });
+    
+    // Handle the drop event
+    position.addEventListener('drop', function(e) {
+      e.preventDefault();
+      position.classList.remove('drag-over');
+      
+      // Get the dragged player data
+      const playerData = e.dataTransfer.getData('text/plain');
+      
+      // Clear the "empty" class and replace content
+      position.classList.remove('empty');
+      
+      // Save original position classes to maintain styling
+      const positionClasses = position.className;
+      
+      // Replace the empty position with the player card
+      position.innerHTML = playerData;
+      
+      // Make the dropped player non-draggable once placed
+      const droppedPlayer = position.querySelector('.player-node');
+      if (droppedPlayer) {
+        droppedPlayer.removeAttribute('draggable');
+        
+        // Add a button to remove player from position
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = 'Remove';
+        removeBtn.addEventListener('click', function() {
+          // Reset the position to empty
+          position.innerHTML = position.getAttribute('data-position').includes('GK') ? 'Goalkeeper' : 
+                               position.getAttribute('data-position').includes('LB') ? 'Defender 1' : 
+                               position.getAttribute('data-position').includes('CB') ? 'Defender 2' : 
+                               position.getAttribute('data-position').includes('RB') ? 'Defender 4' : 
+                               position.getAttribute('data-position').includes('CM') ? 'Midfielder' : 
+                               position.getAttribute('data-position').includes('LW') ? 'Forward 1' : 
+                               position.getAttribute('data-position').includes('CF') ? 'Forward 2' : 'Forward 3';
+          position.className = positionClasses + ' empty';
+        });
+        droppedPlayer.appendChild(removeBtn);
+      }
+      
+      console.log(`Player placed at position ${position.getAttribute('data-position')}`);
+    });
+  });
+}, 5000); // Use timeout to ensure elements are loaded
+
+// Add CSS for drag-and-drop visual feedback
+const style = document.createElement('style');
+style.textContent = `
+  .drag-over {
+    border: 2px dashed gold !important;
+    background-color: rgba(255, 215, 0, 0.3) !important;
+  }
+  
+  .remove-btn {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 10px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }
+  
+  .remove-btn:hover {
+    background-color: #cc0000;
+  }
+`;
+document.head.appendChild(style);

@@ -376,3 +376,28 @@ form button {
 .leading-tight {
     line-height: 1.25;
 }
+
+/* Drag and drop specific styles */
+.player-node {
+  cursor: grab;
+}
+
+.player-node[draggable=true]:hover {
+  box-shadow: 0 0 10px gold;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+.player-node[draggable=true]:active {
+  cursor: grabbing;
+}
+
+#pitch .player.empty {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#pitch .player.empty:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px dashed white;
+}

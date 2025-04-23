@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Sansita+Swashed:wght@300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Youcode futbin - Market</title>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="topnav" id="myTopnav">
+      <a href="index.html"><span class="logo-y">Y</span>FB</a>
+      <a href="index.html">My Team</a>
+      <a href="market.html" class="active">Market</a>
+      <a href="#about">About</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+      <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+      </script>
+    </div>
+    
+    <main class="market-page">
+        <h1>YFB FC 25 Player Market</h1>
+        
+        <div class="market-container">
+            <div class="search-filters">
+                <div class="search-bar">
+                    <input type="text" id="player-search" placeholder="Search player by name..." class="search-input">
+                    <button id="search-btn" class="search-button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+                
+                <div class="filters">
+                    <h3>Filters</h3>
+                    <div class="filter-group">
+                        <label for="position-filter">Position:</label>
+                        <select id="position-filter" class="filter-select">
+                            <option value="">All Positions</option>
+                            <option value="GK">Goalkeeper</option>
+                            <option value="RB">Right Back</option>
+                            <option value="CB">Center Back</option>
+                            <option value="LB">Left Back</option>
+                            <option value="CDM">Defensive Midfielder</option>
+                            <option value="CM">Central Midfielder</option>
+                            <option value="CAM">Attacking Midfielder</option>
+                            <option value="RM">Right Midfielder</option>
+                            <option value="LM">Left Midfielder</option>
+                            <option value="RW">Right Winger</option>
+                            <option value="LW">Left Winger</option>
+                            <option value="ST">Striker</option>
+                            <option value="CF">Center Forward</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="min-rating">Min Rating:</label>
+                        <input type="number" id="min-rating" min="1" max="99" value="70" class="filter-input">
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="max-rating">Max Rating:</label>
+                        <input type="number" id="max-rating" min="1" max="99" value="99" class="filter-input">
+                    </div>
+                    
+                    <button id="apply-filters" class="filter-button">Apply Filters</button>
+                    <button id="reset-filters" class="filter-button reset">Reset</button>
+                </div>
+            </div>
+            
+            <div class="results-container">
+                <div class="results-header">
+                    <h2>Players</h2>
+                    <div class="sort-controls">
+                        <label for="sort-by">Sort by:</label>
+                        <select id="sort-by" class="sort-select">
+                            <option value="rating-desc">Rating (High to Low)</option>
+                            <option value="rating-asc">Rating (Low to High)</option>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="results-grid" class="results-grid">
+                    <!-- Players will be loaded here dynamically -->
+                    <div class="loading">Loading players...</div>
+                </div>
+                
+                <div class="pagination">
+                    <button id="prev-page" class="pagination-btn" disabled>Previous</button>
+                    <span id="page-info">Page 1</span>
+                    <button id="next-page" class="pagination-btn">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Template for player cards -->
+    <template id="player-card-template">
+        <div class="player-market-card">
+            <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+                <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+                    <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                        <div class="text-[0.9rem] mt-2 card-rating"></div>
+                        <div class="text-[0.8rem] card-position"></div>
+                        <div class="block my-[0.2rem_0]">
+                            <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                        </div>
+                        <div class="block">
+                            <img src="" alt="Club" class="club-image w-[0.9rem] h-[16px] object-contain card-club" />
+                        </div>
+                    </div>
+                    <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                        <img src="" alt="Player" class="player-image w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                        <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                            <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                            <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="text-[#e9cc74] w-[80%] mx-auto">
+                        <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                            <span class="player-name block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight"></span>
+                        </div>
+                        <div class="flex justify-center mt-[0.2rem]">
+                            <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                                <div class="flex items-center text-[0.7rem] uppercase">
+                                    <span class="pace-val font-bold mr-[0.2rem]"></span>
+                                    <span class="font-light">PAC</span>
+                                </div>
+                                <div class="flex items-center text-[0.7rem] uppercase">
+                                    <span class="shooting-val font-bold mr-[0.2rem]"></span>
+                                    <span class="font-light">SHO</span>
+                                </div>
+                                <div class="flex items-center text-[0.7rem] uppercase">
+                                    <span class="passing-val font-bold mr-[0.2rem]"></span>
+                                    <span class="font-light">PAS</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex items-center text-[0.7rem] uppercase">
+                                    <span class="dribbling-val font-bold mr-[0.2rem]"></span>
+                                    <span class="font-light">DRI</span>
+                                </div>
+                                <div class="flex items-center text-[0.7rem] uppercase">
+                                    <span class="defending-val font-bold mr-[0.2rem]"></span>
+                                    <span class="font-light">DEF</span>
+                                </div>
+                                <div class="flex items-center text-[0.7rem] uppercase">
+                                    <span class="physical-val font-bold mr-[0.2rem]"></span>
+                                    <span class="font-light">PHY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="add-to-team-btn">Add to Team</button>
+        </div>
+    </template>
+    
+    <!-- Notification template for user feedback -->
+    <div id="notification" class="notification hidden"></div>
+    
+    <script src="market.js"></script>
+</body>
+</html> 

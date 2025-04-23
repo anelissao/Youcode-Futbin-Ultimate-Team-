@@ -14,11 +14,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div class="topnav" id="myTopnav">
-      <a href="#home" class="active"><span class="logo-y">Y</span>FB</a>
-          <a href="#news">My Team</a>
-          <a href="#contact">Market</a>
-          <a href="#about">About</a>
-          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <a href="index.html" class="active"><span class="logo-y">Y</span>FB</a>
+      <a href="index.html">My Team</a>
+      <a href="market.html">Market</a>
+      <a href="#about">About</a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa fa-bars"></i>
       </a>
       <script>
@@ -60,8 +60,15 @@
 
         <div id="bench">
         </div>
+        <div class="team-actions">
+            <button id="load-market-players" class="action-btn">Load Market Players</button>
+            <button id="clear-team" class="action-btn warning">Clear Team</button>
+        </div>
         <div id="form"></div>
     </main>
+    
+    <!-- Notification system for feedback -->
+    <div id="notification" class="notification hidden"></div>
     
     <script src="script.js"></script>
 </body>

@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage = 1;
     const playersPerPage = 16;
     
+    // Fallback images
+    const DEFAULT_PLAYER_IMAGE = 'https://cdn-icons-png.flaticon.com/512/166/166344.png';
+    const DEFAULT_CLUB_IMAGE = 'https://cdn-icons-png.flaticon.com/512/869/869046.png';
+    const MISSING_CLUB_IMAGE = 'https://cdn-icons-png.flaticon.com/512/882/882988.png';
+    
     // DOM elements
     const resultsGrid = document.getElementById('results-grid');
     const searchInput = document.getElementById('player-search');
@@ -30,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             allPlayers = await response.json();
+            console.log('First few players:', allPlayers.slice(0, 5));
             filteredPlayers = [...allPlayers];
             
             // Initial sort by rating (high to low)
@@ -71,8 +77,61 @@ document.addEventListener('DOMContentLoaded', () => {
             // Set player data
             playerCard.querySelector('.card-rating').textContent = player.RATING;
             playerCard.querySelector('.card-position').textContent = player.POSITION;
-            playerCard.querySelector('.club-image').src = player.CLUB_IMAGE;
-            playerCard.querySelector('.player-image').src = player.IMAGE;
+            
+            // Set club image
+            const clubImageElement = playerCard.querySelector('.club-image');
+            const clubImageValue = player.CLUB_IMAGE;
+            
+            if (clubImageValue === "No image found") {
+                // This player is retired/has no club - use the retired icon
+                clubImageElement.src = DEFAULT_CLUB_IMAGE;
+                clubImageElement.alt = 'Free Agent';
+                clubImageElement.title = '⚠️ FREE AGENT / RETIRED ⚠️\nThis player does not have a club';
+                clubImageElement.classList.add('default-club-image');
+                
+                // Add a badge to make it visually clear
+                const badge = document.createElement('span');
+                badge.className = 'retired-badge';
+                badge.textContent = 'FREE AGENT';
+                badge.title = 'This player is retired or a free agent';
+                playerCard.querySelector('.player-market-card').appendChild(badge);
+                
+                console.log(`Player ${player.NAME} is using retired icon`);
+            } else {
+                // Normal club image
+                clubImageElement.src = clubImageValue;
+                clubImageElement.alt = player.CLUB || 'Club';
+                
+                // Handle image loading errors
+                clubImageElement.onerror = function() {
+                    this.onerror = null; // Prevent infinite loops
+                    // If image fails to load but wasn't "No image found"
+                    this.src = MISSING_CLUB_IMAGE;
+                    this.classList.add('missing-club-image');
+                    this.title = 'Club Image Unavailable';
+                };
+            }
+            
+            // Set player image
+            const playerImageElement = playerCard.querySelector('.player-image');
+            if (player.IMAGE === "No image found") {
+                playerImageElement.src = DEFAULT_PLAYER_IMAGE;
+                playerImageElement.alt = player.NAME + ' (No Image)';
+                playerImageElement.title = 'No Image Available';
+                playerImageElement.classList.add('default-player-image');
+            } else {
+                playerImageElement.src = player.IMAGE;
+                playerImageElement.alt = player.NAME;
+                
+                // Handle image loading errors
+                playerImageElement.onerror = function() {
+                    this.onerror = null;
+                    this.src = DEFAULT_PLAYER_IMAGE;
+                    this.classList.add('default-player-image');
+                    this.title = 'Player Image Unavailable';
+                };
+            }
+            
             playerCard.querySelector('.player-name').textContent = player.NAME;
             playerCard.querySelector('.pace-val').textContent = player.PACE;
             playerCard.querySelector('.shooting-val').textContent = player.SHOOTING;
@@ -156,25 +215,38 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add player to user's team
     function addPlayerToTeam(player) {
+        // Create a copy of the player object
+        const playerToAdd = {...player};
+        
+        // Handle case where player has "No image found"
+        if (playerToAdd.IMAGE === "No image found") {
+            playerToAdd.IMAGE = DEFAULT_PLAYER_IMAGE;
+        }
+        
+        // Handle case where club is "No image found" (retired player)
+        if (playerToAdd.CLUB_IMAGE === "No image found") {
+            playerToAdd.CLUB_IMAGE = DEFAULT_CLUB_IMAGE;
+        }
+        
         // Get current team from localStorage
         let myTeam = JSON.parse(localStorage.getItem('myTeam')) || [];
         
         // Check if player is already in team
-        const isPlayerInTeam = myTeam.some(p => p.NAME === player.NAME);
+        const isPlayerInTeam = myTeam.some(p => p.NAME === playerToAdd.NAME);
         
         if (isPlayerInTeam) {
-            showNotification(`${player.NAME} is already in your team!`, 'warning');
+            showNotification(`${playerToAdd.NAME} is already in your team!`, 'warning');
             return;
         }
         
         // Add player to team
-        myTeam.push(player);
+        myTeam.push(playerToAdd);
         
         // Save updated team to localStorage
         localStorage.setItem('myTeam', JSON.stringify(myTeam));
         
         // Show success notification
-        showNotification(`${player.NAME} added to your team!`, 'success');
+        showNotification(`${playerToAdd.NAME} added to your team!`, 'success');
     }
     
     // Show notification

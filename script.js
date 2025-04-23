@@ -1332,32 +1332,69 @@ fetch('http://localhost:3000/players')
 
 // Drag and Drop functionality
 setTimeout(() => {
+  // Function to make an element draggable
+  function makeDraggable(element) {
+    element.setAttribute('draggable', 'true');
+    
+    element.addEventListener('dragstart', function(e) {
+      e.dataTransfer.setData('text/plain', element.outerHTML);
+      // Store the player position for position validation
+      const position = element.querySelector('.card-position')?.textContent || '';
+      e.dataTransfer.setData('position', position);
+      e.dataTransfer.effectAllowed = 'move';
+      
+      // Remove old instance if it's being moved from the pitch
+      if (element.closest('#pitch')) {
+        // Mark this element for removal on successful drop
+        element.setAttribute('data-being-moved', 'true');
+      }
+    });
+  }
+  
   // Get all player elements from bench
   const benchPlayers = document.querySelectorAll('#bench .player-node');
   const emptyPositions = document.querySelectorAll('#pitch .player.empty');
   
   // Make bench players draggable
   benchPlayers.forEach(player => {
-    player.setAttribute('draggable', 'true');
-    
-    player.addEventListener('dragstart', function(e) {
-      e.dataTransfer.setData('text/plain', player.outerHTML);
-      e.dataTransfer.effectAllowed = 'move';
-    });
+    makeDraggable(player);
   });
   
   // Setup drop targets on the pitch
   emptyPositions.forEach(position => {
+    // Get valid positions for this drop target
+    const validPositions = position.className
+      .split(' ')
+      .filter(cls => cls !== 'player' && cls !== 'empty');
+    
     // Allow drop by preventing default behavior
     position.addEventListener('dragover', function(e) {
-      e.preventDefault();
-      position.classList.add('drag-over');
+      const draggedPosition = e.dataTransfer.getData('position');
+      // Check if the dragged player's position matches any valid position for this slot
+      const isValidPosition = validPositions.some(validPos => 
+        draggedPosition.includes(validPos) || 
+        validPos.includes(draggedPosition)
+      );
+      
+      // Only allow drop if position matches
+      if (isValidPosition) {
+        e.preventDefault();
+        position.classList.add('drag-over');
+      }
     });
     
     // Visual feedback when dragging over
     position.addEventListener('dragenter', function(e) {
-      e.preventDefault();
-      position.classList.add('drag-over');
+      const draggedPosition = e.dataTransfer.getData('position');
+      const isValidPosition = validPositions.some(validPos => 
+        draggedPosition.includes(validPos) || 
+        validPos.includes(draggedPosition)
+      );
+      
+      if (isValidPosition) {
+        e.preventDefault();
+        position.classList.add('drag-over');
+      }
     });
     
     // Remove visual feedback when leaving
@@ -1370,8 +1407,42 @@ setTimeout(() => {
       e.preventDefault();
       position.classList.remove('drag-over');
       
-      // Get the dragged player data
+      // Get the dragged player data and position
       const playerData = e.dataTransfer.getData('text/plain');
+      const draggedPosition = e.dataTransfer.getData('position');
+      
+      // Check if the position is valid
+      const isValidPosition = validPositions.some(validPos => 
+        draggedPosition.includes(validPos) || 
+        validPos.includes(draggedPosition)
+      );
+      
+      if (!isValidPosition) {
+        console.log(`Invalid position! ${draggedPosition} cannot be placed in ${validPositions.join(', ')}`);
+        return;
+      }
+      
+      // Remove previously placed player element marked for removal
+      document.querySelectorAll('[data-being-moved="true"]').forEach(el => {
+        // If the element is inside a position container
+        if (el.closest('#pitch .player')) {
+          // Reset the position to original state
+          const posContainer = el.closest('#pitch .player');
+          posContainer.innerHTML = posContainer.getAttribute('data-position').includes('0') ? 'Goalkeeper' : 
+                           posContainer.getAttribute('data-position').includes('1') ? 'Defender 1' : 
+                           posContainer.getAttribute('data-position').includes('2') ? 'Defender 2' : 
+                           posContainer.getAttribute('data-position').includes('3') ? 'Defender 3' :
+                           posContainer.getAttribute('data-position').includes('4') ? 'Defender 4' : 
+                           posContainer.getAttribute('data-position').includes('5') ? 'Midfielder 1' :
+                           posContainer.getAttribute('data-position').includes('6') ? 'Midfielder 2' :
+                           posContainer.getAttribute('data-position').includes('7') ? 'Midfielder 3' :
+                           posContainer.getAttribute('data-position').includes('8') ? 'Forward 1' : 
+                           posContainer.getAttribute('data-position').includes('9') ? 'Forward 2' : 'Forward 3';
+          posContainer.classList.add('empty');
+        } else {
+          el.remove();
+        }
+      });
       
       // Clear the "empty" class and replace content
       position.classList.remove('empty');
@@ -1382,24 +1453,29 @@ setTimeout(() => {
       // Replace the empty position with the player card
       position.innerHTML = playerData;
       
-      // Make the dropped player non-draggable once placed
+      // Make the dropped player draggable again so it can be moved
       const droppedPlayer = position.querySelector('.player-node');
       if (droppedPlayer) {
-        droppedPlayer.removeAttribute('draggable');
+        makeDraggable(droppedPlayer);
         
         // Add a button to remove player from position
         const removeBtn = document.createElement('button');
         removeBtn.className = 'remove-btn';
         removeBtn.textContent = 'Remove';
-        removeBtn.addEventListener('click', function() {
+        removeBtn.addEventListener('click', function(e) {
+          e.stopPropagation(); // Prevent drag event from starting
+          
           // Reset the position to empty
-          position.innerHTML = position.getAttribute('data-position').includes('GK') ? 'Goalkeeper' : 
-                               position.getAttribute('data-position').includes('LB') ? 'Defender 1' : 
-                               position.getAttribute('data-position').includes('CB') ? 'Defender 2' : 
-                               position.getAttribute('data-position').includes('RB') ? 'Defender 4' : 
-                               position.getAttribute('data-position').includes('CM') ? 'Midfielder' : 
-                               position.getAttribute('data-position').includes('LW') ? 'Forward 1' : 
-                               position.getAttribute('data-position').includes('CF') ? 'Forward 2' : 'Forward 3';
+          position.innerHTML = position.getAttribute('data-position').includes('0') ? 'Goalkeeper' : 
+                               position.getAttribute('data-position').includes('1') ? 'Defender 1' : 
+                               position.getAttribute('data-position').includes('2') ? 'Defender 2' : 
+                               position.getAttribute('data-position').includes('3') ? 'Defender 3' :
+                               position.getAttribute('data-position').includes('4') ? 'Defender 4' : 
+                               position.getAttribute('data-position').includes('5') ? 'Midfielder 1' :
+                               position.getAttribute('data-position').includes('6') ? 'Midfielder 2' :
+                               position.getAttribute('data-position').includes('7') ? 'Midfielder 3' :
+                               position.getAttribute('data-position').includes('8') ? 'Forward 1' : 
+                               position.getAttribute('data-position').includes('9') ? 'Forward 2' : 'Forward 3';
           position.className = positionClasses + ' empty';
         });
         droppedPlayer.appendChild(removeBtn);
@@ -1408,14 +1484,27 @@ setTimeout(() => {
       console.log(`Player placed at position ${position.getAttribute('data-position')}`);
     });
   });
+  
+  // Event delegation for new draggable elements
+  document.addEventListener('dragend', function(e) {
+    // Clean up any leftover elements marked for moving
+    document.querySelectorAll('[data-being-moved="true"]').forEach(el => {
+      el.removeAttribute('data-being-moved');
+    });
+  });
 }, 5000); // Use timeout to ensure elements are loaded
 
-// Add CSS for drag-and-drop visual feedback
+// Update CSS for drag-and-drop visual feedback
 const style = document.createElement('style');
 style.textContent = `
   .drag-over {
     border: 2px dashed gold !important;
     background-color: rgba(255, 215, 0, 0.3) !important;
+  }
+  
+  .invalid-position {
+    border: 2px dashed red !important;
+    background-color: rgba(255, 0, 0, 0.1) !important;
   }
   
   .remove-btn {
@@ -1429,6 +1518,7 @@ style.textContent = `
     position: absolute;
     bottom: 5px;
     right: 5px;
+    z-index: 10;
   }
   
   .remove-btn:hover {

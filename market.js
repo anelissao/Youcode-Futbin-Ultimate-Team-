@@ -218,16 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create a copy of the player object
         const playerToAdd = {...player};
         
-        // Handle case where player has "No image found"
-        if (playerToAdd.IMAGE === "No image found") {
-            playerToAdd.IMAGE = DEFAULT_PLAYER_IMAGE;
-        }
-        
-        // Handle case where club is "No image found" (retired player)
-        if (playerToAdd.CLUB_IMAGE === "No image found") {
-            playerToAdd.CLUB_IMAGE = DEFAULT_CLUB_IMAGE;
-        }
-        
         // Get current team from localStorage
         let myTeam = JSON.parse(localStorage.getItem('myTeam')) || [];
         
@@ -237,6 +227,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isPlayerInTeam) {
             showNotification(`${playerToAdd.NAME} is already in your team!`, 'warning');
             return;
+        }
+        
+        // Check if team has reached the maximum of 25 players
+        if (myTeam.length >= 25) {
+            showNotification(`Your bench is full! Maximum 25 players allowed. Please remove some players first.`, 'error');
+            return;
+        }
+        
+        // Handle case where player has "No image found"
+        if (playerToAdd.IMAGE === "No image found") {
+            playerToAdd.IMAGE = DEFAULT_PLAYER_IMAGE;
+        }
+        
+        // Handle case where club is "No image found" (retired player)
+        if (playerToAdd.CLUB_IMAGE === "No image found") {
+            playerToAdd.CLUB_IMAGE = DEFAULT_CLUB_IMAGE;
+            // Add a flag to identify this is a retired player
+            playerToAdd.IS_RETIRED = true;
         }
         
         // Add player to team

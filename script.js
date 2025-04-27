@@ -58,9 +58,55 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Clear Team button not found!');
     }
     
-    // Only load players from localStorage, not from hardcoded array
+    // Check localStorage content for debugging
+    console.log('Current localStorage content:');
+    console.log('myTeam:', localStorage.getItem('myTeam'));
+    console.log('savedPitch:', localStorage.getItem('savedPitch'));
+    
+    // Load players from localStorage to bench first
     loadMarketPlayers();
+    
+    // Call loadPitchFromLocalStorage with a direct call and a fallback
+    // Multiple attempts with different timing to ensure it loads properly
+    setTimeout(() => {
+      try {
+        console.log('First attempt to load pitch...');
+        loadPitchFromLocalStorage();
+      } catch (e) {
+        console.error('Error in first load attempt:', e);
+      }
+    }, 1000);
+    
+    // Fallback with longer delay
+    setTimeout(() => {
+      try {
+        console.log('Second attempt to load pitch...');
+        loadPitchFromLocalStorage();
+      } catch (e) {
+        console.error('Error in second load attempt:', e);
+      }
+    }, 3000);
+    
+    // Final attempt with even longer delay
+    setTimeout(() => {
+      try {
+        console.log('Final attempt to load pitch...');
+        loadPitchFromLocalStorage();
+      } catch (e) {
+        console.error('Error in final load attempt:', e);
+      }
+    }, 6000);
   }
+  
+  // Make sure pitch positions have the correct data-position attributes
+  const pitchPositions = document.querySelectorAll('#pitch .player');
+  pitchPositions.forEach((position, index) => {
+    // Ensure data-position attribute is set
+    if (!position.hasAttribute('data-position')) {
+      position.setAttribute('data-position', index.toString());
+      console.log(`Setting missing data-position attribute for position ${index}`);
+    }
+  });
 });
 
 // Handle API player data for dynamic references if needed but don't add to bench directly
@@ -601,6 +647,9 @@ setTimeout(() => {
           // Re-add the player to the bench when removed from the pitch
           addPlayerBackToBench(droppedPlayer);
           
+          // Save the updated pitch state to localStorage
+          setTimeout(() => savePitchToLocalStorage(), 100); // Slight delay to ensure DOM is updated
+          
           // Show notification
           showNotification('Player removed from position', 'success');
         });
@@ -608,6 +657,9 @@ setTimeout(() => {
         
         // Show success notification
         showNotification(`Player successfully placed in ${validPositions[0]} position!`, 'success');
+        
+        // Save the updated pitch state to localStorage
+        setTimeout(() => savePitchToLocalStorage(), 100); // Slight delay to ensure DOM is updated
       }
       
       console.log(`Player placed at position ${position.getAttribute('data-position')}`);
@@ -886,6 +938,9 @@ function clearTeam() {
     // Clear localStorage team data
     localStorage.removeItem('myTeam');
     
+    // Clear pitch data in localStorage
+    clearPitchInLocalStorage();
+    
     showNotification('Team cleared successfully! All players have been removed.', 'success');
   }
 }
@@ -1095,6 +1150,9 @@ function initializeDragAndDrop() {
           // Re-add the player to the bench when removed from the pitch
           addPlayerBackToBench(droppedPlayer);
           
+          // Save the updated pitch state to localStorage
+          setTimeout(() => savePitchToLocalStorage(), 100); // Slight delay to ensure DOM is updated
+          
           // Show notification
           showNotification('Player removed from position', 'success');
         });
@@ -1102,6 +1160,9 @@ function initializeDragAndDrop() {
         
         // Show success notification
         showNotification(`Player successfully placed in ${validPositions[0]} position!`, 'success');
+        
+        // Save the updated pitch state to localStorage
+        setTimeout(() => savePitchToLocalStorage(), 100); // Slight delay to ensure DOM is updated
       }
     });
   });
@@ -1448,3 +1509,243 @@ function addPlayerBackToBench(playerNode) {
     }, 100);
   }
 }
+
+// Function to save the current state of the pitch to localStorage
+function savePitchToLocalStorage() {
+  const pitchPositions = document.querySelectorAll('#pitch .player');
+  const savedPitch = [];
+  
+  pitchPositions.forEach(position => {
+    const positionIndex = position.getAttribute('data-position');
+    const playerNode = position.querySelector('.player-node');
+    
+    if (playerNode) {
+      // Position has a player
+      const playerName = playerNode.querySelector('.player-name')?.textContent;
+      
+      // Find the full player data from the team in localStorage
+      const myTeam = JSON.parse(localStorage.getItem('myTeam')) || [];
+      const playerData = myTeam.find(p => p.NAME === playerName);
+      
+      if (playerData) {
+        savedPitch.push({
+          position: positionIndex,
+          playerName: playerName,
+          playerData: playerData
+        });
+      }
+    } else {
+      // Empty position
+      savedPitch.push({
+        position: positionIndex,
+        empty: true
+      });
+    }
+  });
+  
+  // Save to localStorage with error handling
+  try {
+    localStorage.setItem('savedPitch', JSON.stringify(savedPitch));
+    console.log('Saved pitch state to localStorage:', savedPitch);
+  } catch (e) {
+    console.error('Error saving pitch to localStorage:', e);
+    showNotification('Error saving team setup. Your browser storage might be full.', 'error');
+  }
+}
+
+// Function to load the pitch state from localStorage
+function loadPitchFromLocalStorage() {
+  // Get saved pitch data with error handling
+  let savedPitch;
+  try {
+    const savedPitchData = localStorage.getItem('savedPitch');
+    console.log('Raw savedPitch data:', savedPitchData);
+    savedPitch = JSON.parse(savedPitchData);
+  } catch (e) {
+    console.error('Error parsing saved pitch data:', e);
+    return;
+  }
+  
+  if (!savedPitch || !Array.isArray(savedPitch) || savedPitch.length === 0) {
+    console.log('No valid saved pitch found in localStorage');
+    return;
+  }
+  
+  console.log('Loading pitch from localStorage:', savedPitch);
+  
+  // First, make sure all positions are empty
+  document.querySelectorAll('#pitch .player').forEach(position => {
+    const positionIndex = position.getAttribute('data-position');
+    position.innerHTML = positionIndex == 0 ? 'Goalkeeper' : 
+                       positionIndex == 1 ? 'Defender 1' : 
+                       positionIndex == 2 ? 'Defender 2' : 
+                       positionIndex == 3 ? 'Defender 3' :
+                       positionIndex == 4 ? 'Defender 4' : 
+                       positionIndex == 5 ? 'Midfielder 1' :
+                       positionIndex == 6 ? 'Midfielder 2' :
+                       positionIndex == 7 ? 'Midfielder 3' :
+                       positionIndex == 8 ? 'Forward 1' : 
+                       positionIndex == 9 ? 'Forward 2' : 'Forward 3';
+    position.classList.add('empty');
+  });
+  
+  // Keep track of how many players were successfully loaded
+  let loadedCount = 0;
+  
+  // Now place the players according to saved state
+  savedPitch.forEach(item => {
+    if (item.empty || !item.playerData) {
+      return; // Skip empty positions or invalid data
+    }
+    
+    const position = document.querySelector(`#pitch .player[data-position="${item.position}"]`);
+    if (!position) {
+      console.error(`Position ${item.position} not found`);
+      return;
+    }
+    
+    // Create player card HTML
+    const playerData = item.playerData;
+    const playerHTML = `
+    <div class="player-node">
+      <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
+          <div class="relative flex text-[#e9cc74] px-[0.6rem]">
+              <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
+                  <div class="text-[0.9rem] mt-2 card-rating">${playerData.RATING}</div>
+                  <div class="text-[0.8rem] card-position">${playerData.POSITION}</div>
+                  <div class="block my-[0.2rem_0]">
+                      <img src="https://flags.fmcdn.net/data/flags/w580/pt.png" alt="National Flag" class="w-[0.8rem] h-[12px] object-contain" />
+                  </div>
+                  <div class="block">
+                      <img src="${playerData.CLUB_IMAGE}" alt="Club" class="w-[0.9rem] h-[16px] object-contain card-club" />
+                  </div>
+              </div>
+              <div class="w-[70px] h-[70px] mx-auto overflow-hidden">
+                  <img src="${playerData.IMAGE}" alt="Player" class="w-full h-full object-contain relative right-[-0.6rem] bottom-0" />
+                  <div class="absolute right-0 bottom-[-0.5rem] w-full h-[1rem] text-right text-[#333] text-[0.5rem] font-bold uppercase">
+                      <span class="ml-[0.4rem] text-shadow-lg">4*SM</span>
+                      <span class="ml-[0.4rem] text-shadow-lg">4*WF</span>
+                  </div>
+              </div>
+          </div>
+          <div class="relative">
+              <div class="text-[#e9cc74] w-[80%] mx-auto">
+                  <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
+                      <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight player-name">${playerData.NAME}</span>
+                  </div>
+                  <div class="flex justify-center mt-[0.2rem]">
+                      <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
+                          <div class="flex items-center text-[0.7rem] uppercase">
+                              <span class="font-bold mr-[0.2rem]">${playerData.PACE}</span>
+                              <span class="font-light">PAC</span>
+                          </div>
+                          <div class="flex items-center text-[0.7rem] uppercase">
+                              <span class="font-bold mr-[0.2rem]">${playerData.SHOOTING}</span>
+                              <span class="font-light">SHO</span>
+                          </div>
+                          <div class="flex items-center text-[0.7rem] uppercase">
+                              <span class="font-bold mr-[0.2rem]">${playerData.PASSING}</span>
+                              <span class="font-light">PAS</span>
+                          </div>
+                      </div>
+                      <div>
+                          <div class="flex items-center text-[0.7rem] uppercase">
+                              <span class="font-bold mr-[0.2rem]">${playerData.DRIBBLING}</span>
+                              <span class="font-light">DRI</span>
+                          </div>
+                          <div class="flex items-center text-[0.7rem] uppercase">
+                              <span class="font-bold mr-[0.2rem]">${playerData.DEFENDING}</span>
+                              <span class="font-light">DEF</span>
+                          </div>
+                          <div class="flex items-center text-[0.7rem] uppercase">
+                              <span class="font-bold mr-[0.2rem]">${playerData.PHYSICAL}</span>
+                              <span class="font-light">PHY</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    `;
+    
+    // Find player on the bench to remove it
+    const benchPlayer = Array.from(document.querySelectorAll('#bench .player-node')).find(node => {
+      return node.querySelector('.player-name')?.textContent === playerData.NAME;
+    });
+    
+    if (benchPlayer) {
+      benchPlayer.remove();
+    }
+    
+    // Place player on the pitch
+    position.classList.remove('empty');
+    position.innerHTML = playerHTML;
+    loadedCount++;
+    
+    // Make player draggable
+    const droppedPlayer = position.querySelector('.player-node');
+    if (droppedPlayer) {
+      makeDraggable(droppedPlayer);
+      
+      // Add remove button
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'remove-btn';
+      removeBtn.textContent = 'Remove';
+      removeBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent drag event from starting
+        
+        // Reset the position to empty
+        const positionClasses = position.className.replace('empty', '').trim();
+        position.innerHTML = position.getAttribute('data-position').includes('0') ? 'Goalkeeper' : 
+                             position.getAttribute('data-position').includes('1') ? 'Defender 1' : 
+                             position.getAttribute('data-position').includes('2') ? 'Defender 2' : 
+                             position.getAttribute('data-position').includes('3') ? 'Defender 3' :
+                             position.getAttribute('data-position').includes('4') ? 'Defender 4' : 
+                             position.getAttribute('data-position').includes('5') ? 'Midfielder 1' :
+                             position.getAttribute('data-position').includes('6') ? 'Midfielder 2' :
+                             position.getAttribute('data-position').includes('7') ? 'Midfielder 3' :
+                             position.getAttribute('data-position').includes('8') ? 'Forward 1' : 
+                             position.getAttribute('data-position').includes('9') ? 'Forward 2' : 'Forward 3';
+        position.className = positionClasses + ' empty';
+        
+        // Re-add the player to the bench when removed from the pitch
+        addPlayerBackToBench(droppedPlayer);
+        
+        // Save the updated pitch state to localStorage
+        setTimeout(() => savePitchToLocalStorage(), 100); // Slight delay to ensure DOM is updated
+        
+        // Show notification
+        showNotification('Player removed from position', 'success');
+      });
+      droppedPlayer.appendChild(removeBtn);
+    }
+  });
+  
+  if (loadedCount > 0) {
+    showNotification(`Team formation loaded with ${loadedCount} players!`, 'success');
+  }
+}
+
+// Function to clear pitch in localStorage
+function clearPitchInLocalStorage() {
+  localStorage.removeItem('savedPitch');
+  console.log('Cleared pitch state in localStorage');
+}
+
+// Add a window load event handler to make sure everything is loaded before attempting to restore the pitch
+window.addEventListener('load', function() {
+  // Check if we're on the team management page
+  if (document.getElementById('pitch')) {
+    console.log('Window fully loaded - final attempt to restore pitch state');
+    
+    // Make one final attempt to load the pitch
+    setTimeout(() => {
+      try {
+        loadPitchFromLocalStorage();
+      } catch (e) {
+        console.error('Error in window.load pitch restoration:', e);
+      }
+    }, 1000);
+  }
+});

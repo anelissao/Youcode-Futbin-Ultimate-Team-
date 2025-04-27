@@ -117,53 +117,123 @@ fetch('http://localhost:3000/players')
     for (let i = 0; i < Ebtns.length; i++) {
         Ebtns[i].addEventListener('click', () => {
             const form = document.getElementById("form");
+            const player = Ebtns[i].closest('.player-node');
+            const playerName = player.querySelector('.player-name')?.textContent;
+            const playerPosition = player.querySelector('.card-position')?.textContent;
+            const playerRating = player.querySelector('.card-rating')?.textContent;
+            
+            // Get all player data from localStorage to populate form
+            const myTeam = JSON.parse(localStorage.getItem('myTeam')) || [];
+            const playerData = myTeam.find(p => p.NAME === playerName) || {};
+            
             form.innerHTML = `
-            <form id="playerForm">
-                <label for="name">NAME:</label>
-                <input type="text" id="name" name="name" required>
+            <div class="edit-form-overlay">
+              <div class="edit-form-container">
+                <div class="edit-form-header">
+                  <h2>Edit Player: ${playerName}</h2>
+                  <button class="close-form-btn">&times;</button>
+                </div>
+                <form id="playerForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" value="${playerData.NAME || playerName || ''}" required>
+                    </div>
 
-                <label for="club">CLUB:</label>
-                <input type="text" id="club" name="club" required>
+                    <div class="form-group">
+                        <label for="club">Club</label>
+                        <input type="text" id="club" name="club" value="${playerData.CLUB || ''}" required>
+                    </div>
 
-                <label for="league">LEAGUE:</label>
-                <input type="text" id="league" name="league" required>
+                    <div class="form-group">
+                        <label for="league">League</label>
+                        <input type="text" id="league" name="league" value="${playerData.LEAGUE || ''}" required>
+                    </div>
 
-                <label for="position">POSITION:</label>
-                <input type="text" id="position" name="position" required>
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <input type="text" id="position" name="position" value="${playerData.POSITION || playerPosition || ''}" required>
+                    </div>
 
-                <label for="tier">TIER:</label>
-                <input type="text" id="tier" name="tier" required>
+                    <div class="form-group">
+                        <label for="tier">Tier</label>
+                        <input type="text" id="tier" name="tier" value="${playerData.TIER || ''}" required>
+                    </div>
 
-                <label for="rating">RATING:</label>
-                <input type="number" id="rating" name="rating" required>
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <input type="number" id="rating" name="rating" value="${playerData.RATING || playerRating || ''}" required>
+                    </div>
 
-                <label for="pace">PACE:</label>
-                <input type="number" id="pace" name="pace" required>
+                    <div class="form-row">
+                      <div class="form-group half">
+                          <label for="pace">Pace</label>
+                          <input type="number" id="pace" name="pace" value="${playerData.PACE || ''}" required>
+                      </div>
 
-                <label for="shooting">SHOOTING:</label>
-                <input type="number" id="shooting" name="shooting" required>
+                      <div class="form-group half">
+                          <label for="shooting">Shooting</label>
+                          <input type="number" id="shooting" name="shooting" value="${playerData.SHOOTING || ''}" required>
+                      </div>
+                    </div>
 
-                <label for="passing">PASSING:</label>
-                <input type="number" id="passing" name="passing" required>
+                    <div class="form-row">
+                      <div class="form-group half">
+                          <label for="passing">Passing</label>
+                          <input type="number" id="passing" name="passing" value="${playerData.PASSING || ''}" required>
+                      </div>
 
-                <label for="dribbling">DRIBBLING:</label>
-                <input type="number" id="dribbling" name="dribbling" required>
+                      <div class="form-group half">
+                          <label for="dribbling">Dribbling</label>
+                          <input type="number" id="dribbling" name="dribbling" value="${playerData.DRIBBLING || ''}" required>
+                      </div>
+                    </div>
 
-                <label for="defending">DEFENDING:</label>
-                <input type="number" id="defending" name="defending" required>
+                    <div class="form-row">
+                      <div class="form-group half">
+                          <label for="defending">Defending</label>
+                          <input type="number" id="defending" name="defending" value="${playerData.DEFENDING || ''}" required>
+                      </div>
 
-                <label for="physical">PHYSICAL:</label>
-                <input type="number" id="physical" name="physical" required>
+                      <div class="form-group half">
+                          <label for="physical">Physical</label>
+                          <input type="number" id="physical" name="physical" value="${playerData.PHYSICAL || ''}" required>
+                      </div>
+                    </div>
 
-                <label for="image">IMAGE (URL):</label>
-                <input type="url" id="image" name="image" required>
+                    <div class="form-group">
+                        <label for="image">Player Image URL</label>
+                        <input type="url" id="image" name="image" value="${playerData.IMAGE || ''}" required>
+                    </div>
 
-                <label for="clubImage">CLUB_IMAGE (URL):</label>
-                <input type="url" id="clubImage" name="clubImage" required>
+                    <div class="form-group">
+                        <label for="clubImage">Club Image URL</label>
+                        <input type="url" id="clubImage" name="clubImage" value="${playerData.CLUB_IMAGE || ''}" required>
+                    </div>
 
-                <button type="submit" id="submitBtn">Submit</button>
-            </form>
+                    <div class="form-buttons">
+                        <button type="submit" id="submitBtn">Save Changes</button>
+                        <button type="button" id="cancelBtn">Cancel</button>
+                    </div>
+                </form>
+              </div>
+            </div>
             `;
+            
+            // Close form when clicking on close button or cancel
+            const closeBtn = document.querySelector('.close-form-btn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    form.innerHTML = '';
+                });
+            }
+            
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', () => {
+                    form.innerHTML = '';
+                });
+            }
 
             const playerForm = document.getElementById('playerForm');
             playerForm.addEventListener('submit', (event) => {
@@ -186,14 +256,17 @@ fetch('http://localhost:3000/players')
                     CLUB_IMAGE: playerForm.clubImage.value,
                 };
 
+                // Update player in localStorage
+                updatePlayerInLocalStorage(playerName, formData);
+
                 const playerHTML = `
                 <div class="player-node">
                     <div class="relative flex items-center justify-center">
                         <div class="relative w-[120px] h-[192px] bg-cover bg-center p-[1rem_0] bg-[url('https://selimdoyranli.com/cdn/fut-player-card/img/card_bg.png')] transition-all ease-in">
                             <div class="relative flex text-[#e9cc74] px-[0.6rem]">
                                 <div class="absolute py-[0.4rem_0] text-xs uppercase font-light">
-                                    <div class="text-[0.9rem] mt-2">${formData.RATING}</div>
-                                    <div class="text-[0.8rem]">${formData.POSITION}</div>
+                                    <div class="text-[0.9rem] mt-2 card-rating">${formData.RATING}</div>
+                                    <div class="text-[0.8rem] card-position">${formData.POSITION}</div>
                                     <div class="block my-[0.2rem_0]">
                                         <img src="https://selimdoyranli.com/cdn/fut-player-card/img/argentina.svg" alt="Flag" class="w-[0.8rem] h-[12px] object-contain" />
                                     </div>
@@ -212,7 +285,7 @@ fetch('http://localhost:3000/players')
                             <div class="relative">
                                 <div class="text-[#e9cc74] w-[80%] mx-auto">
                                     <div class="text-center text-[0.9rem] uppercase border-b-2 border-[#e9cc74]/[0.1] pb-[0.2rem] px-1">
-                                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight">${formData.NAME}</span>
+                                        <span class="block text-shadow-lg truncate max-w-[75px] mx-auto text-[0.7rem] leading-tight player-name">${formData.NAME}</span>
                                     </div>
                                     <div class="flex justify-center mt-[0.2rem]">
                                         <div class="pr-[0.8rem] border-r-2 border-[#e9cc74]/[0.1]">
@@ -254,10 +327,39 @@ fetch('http://localhost:3000/players')
                     </div>
                 </div>
                 `;
-                console.log(playerHTML);
-                playersArr.splice(i, 1)
-                container.innerHTML += playerHTML
+                
+                // Replace the player in the DOM
+                player.outerHTML = playerHTML;
+                
+                // Close the form
+                form.innerHTML = '';
+                
+                // Show notification
+                showNotification(`${formData.NAME} has been updated!`, 'success');
+                
+                // Re-initialize drag and drop
+                setTimeout(initializeDragAndDrop, 100);
             });
+        });
+    }
+    
+    // Handle delete buttons for players
+    const deleteButtons = document.querySelectorAll(".d-btn");
+    for (let i = 0; i < deleteButtons.length; i++) {
+        deleteButtons[i].addEventListener('click', () => {
+            const player = deleteButtons[i].closest('.player-node');
+            const playerName = player.querySelector('.player-name')?.textContent;
+            
+            if (confirm(`Are you sure you want to remove ${playerName} from your team?`)) {
+                // Remove from localStorage
+                removePlayerFromLocalStorage(playerName);
+                
+                // Remove from UI
+                player.remove();
+                
+                // Show notification
+                showNotification(`${playerName} has been removed from your team`, 'success');
+            }
         });
     }
 }, 4000);
@@ -1003,3 +1105,210 @@ document.addEventListener('mousemove', function(e) {
     tooltip.style.top = (e.clientY + 15) + 'px';
   }
 });
+
+// Function to update a player in localStorage
+function updatePlayerInLocalStorage(playerName, updatedData) {
+  // Get current team from localStorage
+  let myTeam = JSON.parse(localStorage.getItem('myTeam')) || [];
+  
+  // Find the player by name and update it
+  myTeam = myTeam.map(player => {
+    if (player.NAME === playerName) {
+      return updatedData; // Replace with updated data
+    }
+    return player;
+  });
+  
+  // Save updated team back to localStorage
+  localStorage.setItem('myTeam', JSON.stringify(myTeam));
+  
+  console.log(`Updated player "${playerName}" in localStorage`);
+}
+
+// Add these styles for the edit form
+const formStyles = document.createElement('style');
+formStyles.textContent = `
+  .edit-form-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .edit-form-container {
+    background: #191919;
+    color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease;
+    border: 1px solid #333;
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  .edit-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+  }
+  
+  .edit-form-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #e9cc74;
+    font-weight: 600;
+  }
+  
+  .close-form-btn {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .close-form-btn:hover {
+    color: #e9cc74;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .form-group.half {
+    flex: 1;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: #ccc;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    background: #252525;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #e9cc74;
+    box-shadow: 0 0 0 2px rgba(233, 204, 116, 0.2);
+  }
+  
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+  }
+  
+  .form-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  
+  #submitBtn {
+    background: #e9cc74;
+    color: #222;
+  }
+  
+  #submitBtn:hover {
+    background: #d4bc6a;
+    transform: translateY(-2px);
+  }
+  
+  #cancelBtn {
+    background: #333;
+    color: #ccc;
+  }
+  
+  #cancelBtn:hover {
+    background: #444;
+    transform: translateY(-2px);
+  }
+  
+  /* Style the existing buttons */
+  .btns {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+    justify-content: center;
+  }
+  
+  .e-btn, .d-btn {
+    padding: 4px 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+  
+  .e-btn {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .e-btn:hover {
+    background: #3e8e41;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  }
+  
+  .d-btn {
+    background: #ff4444;
+    color: white;
+  }
+  
+  .d-btn:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  }
+`;
+document.head.appendChild(formStyles);

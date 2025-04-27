@@ -297,6 +297,8 @@ setTimeout(() => {
       // Store the player position for position validation
       const position = element.querySelector('.card-position')?.textContent || '';
       e.dataTransfer.setData('position', position);
+      // Store the position globally to access during dragover
+      window.currentDraggedPosition = position;
       e.dataTransfer.effectAllowed = 'move';
       
       // Remove old instance if it's being moved from the pitch
@@ -304,6 +306,11 @@ setTimeout(() => {
         // Mark this element for removal on successful drop
         element.setAttribute('data-being-moved', 'true');
       }
+    });
+    
+    // Clear the global variable when drag ends
+    element.addEventListener('dragend', function() {
+      window.currentDraggedPosition = null;
     });
   }
   
@@ -325,7 +332,9 @@ setTimeout(() => {
     
     // Allow drop by preventing default behavior
     position.addEventListener('dragover', function(e) {
-      const draggedPosition = e.dataTransfer.getData('position');
+      // Use the globally stored position instead of trying to get it from dataTransfer
+      const draggedPosition = window.currentDraggedPosition || '';
+      
       // Check if the dragged player's position matches any valid position for this slot
       const isValidPosition = validPositions.some(validPos => 
         draggedPosition.includes(validPos) || 
@@ -338,12 +347,29 @@ setTimeout(() => {
         position.classList.add('drag-over');
       } else {
         position.classList.add('invalid-position');
+        
+        // Show tooltip or indicator for incompatible position
+        const validPositionsText = validPositions.join('/');
+        
+        // Create or update position tooltip
+        let tooltip = document.getElementById('position-tooltip');
+        if (!tooltip) {
+          tooltip = document.createElement('div');
+          tooltip.id = 'position-tooltip';
+          tooltip.className = 'position-tooltip';
+          document.body.appendChild(tooltip);
+        }
+        
+        tooltip.innerHTML = `<strong>Wrong Position!</strong><br>${draggedPosition} players can't play in ${validPositionsText} position`;
+        tooltip.style.display = 'block';
+        tooltip.style.left = (e.clientX + 10) + 'px';
+        tooltip.style.top = (e.clientY + 10) + 'px';
       }
     });
     
     // Visual feedback when dragging over
     position.addEventListener('dragenter', function(e) {
-      const draggedPosition = e.dataTransfer.getData('position');
+      const draggedPosition = window.currentDraggedPosition || '';
       const isValidPosition = validPositions.some(validPos => 
         draggedPosition.includes(validPos) || 
         validPos.includes(draggedPosition)
@@ -361,6 +387,12 @@ setTimeout(() => {
     position.addEventListener('dragleave', function() {
       position.classList.remove('drag-over');
       position.classList.remove('invalid-position');
+      
+      // Hide position tooltip
+      const tooltip = document.getElementById('position-tooltip');
+      if (tooltip) {
+        tooltip.style.display = 'none';
+      }
     });
     
     // Handle the drop event
@@ -369,9 +401,15 @@ setTimeout(() => {
       position.classList.remove('drag-over');
       position.classList.remove('invalid-position');
       
+      // Hide position tooltip
+      const tooltip = document.getElementById('position-tooltip');
+      if (tooltip) {
+        tooltip.style.display = 'none';
+      }
+      
       // Get the dragged player data and position
       const playerData = e.dataTransfer.getData('text/plain');
-      const draggedPosition = e.dataTransfer.getData('position');
+      const draggedPosition = window.currentDraggedPosition || e.dataTransfer.getData('position');
       
       // Check if the position is valid
       const isValidPosition = validPositions.some(validPos => 
@@ -466,6 +504,12 @@ setTimeout(() => {
       el.classList.remove('drag-over');
       el.classList.remove('invalid-position');
     });
+    
+    // Hide position tooltip
+    const tooltip = document.getElementById('position-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+    }
   });
 }, 5000); // Use timeout to ensure elements are loaded
 
@@ -480,6 +524,30 @@ style.textContent = `
   .invalid-position {
     border: 2px dashed red !important;
     background-color: rgba(255, 0, 0, 0.1) !important;
+  }
+  
+  .position-tooltip {
+    position: fixed;
+    background-color: #ff4444;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    z-index: 1000;
+    pointer-events: none;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    display: none;
+    max-width: 250px;
+    text-align: center;
+    border: 2px solid #cc0000;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
   }
   
   .remove-btn {
@@ -738,7 +806,9 @@ function initializeDragAndDrop() {
     
     // Allow drop by preventing default behavior
     position.addEventListener('dragover', function(e) {
-      const draggedPosition = e.dataTransfer.getData('position');
+      // Use the globally stored position instead of trying to get it from dataTransfer
+      const draggedPosition = window.currentDraggedPosition || '';
+      
       // Check if the dragged player's position matches any valid position for this slot
       const isValidPosition = validPositions.some(validPos => 
         draggedPosition.includes(validPos) || 
@@ -751,12 +821,29 @@ function initializeDragAndDrop() {
         position.classList.add('drag-over');
       } else {
         position.classList.add('invalid-position');
+        
+        // Show tooltip or indicator for incompatible position
+        const validPositionsText = validPositions.join('/');
+        
+        // Create or update position tooltip
+        let tooltip = document.getElementById('position-tooltip');
+        if (!tooltip) {
+          tooltip = document.createElement('div');
+          tooltip.id = 'position-tooltip';
+          tooltip.className = 'position-tooltip';
+          document.body.appendChild(tooltip);
+        }
+        
+        tooltip.innerHTML = `<strong>Wrong Position!</strong><br>${draggedPosition} players can't play in ${validPositionsText} position`;
+        tooltip.style.display = 'block';
+        tooltip.style.left = (e.clientX + 10) + 'px';
+        tooltip.style.top = (e.clientY + 10) + 'px';
       }
     });
     
     // Visual feedback when dragging over
     position.addEventListener('dragenter', function(e) {
-      const draggedPosition = e.dataTransfer.getData('position');
+      const draggedPosition = window.currentDraggedPosition || '';
       const isValidPosition = validPositions.some(validPos => 
         draggedPosition.includes(validPos) || 
         validPos.includes(draggedPosition)
@@ -774,6 +861,12 @@ function initializeDragAndDrop() {
     position.addEventListener('dragleave', function() {
       position.classList.remove('drag-over');
       position.classList.remove('invalid-position');
+      
+      // Hide position tooltip
+      const tooltip = document.getElementById('position-tooltip');
+      if (tooltip) {
+        tooltip.style.display = 'none';
+      }
     });
     
     // Handle the drop event
@@ -782,9 +875,15 @@ function initializeDragAndDrop() {
       position.classList.remove('drag-over');
       position.classList.remove('invalid-position');
       
+      // Hide position tooltip
+      const tooltip = document.getElementById('position-tooltip');
+      if (tooltip) {
+        tooltip.style.display = 'none';
+      }
+      
       // Get the dragged player data and position
       const playerData = e.dataTransfer.getData('text/plain');
-      const draggedPosition = e.dataTransfer.getData('position');
+      const draggedPosition = window.currentDraggedPosition || e.dataTransfer.getData('position');
       
       // Check if the position is valid
       const isValidPosition = validPositions.some(validPos => 
@@ -896,3 +995,11 @@ function removePlayerFromLocalStorage(playerName) {
   
   console.log(`Removed player "${playerName}" from localStorage`);
 }
+
+document.addEventListener('mousemove', function(e) {
+  const tooltip = document.getElementById('position-tooltip');
+  if (tooltip && tooltip.style.display === 'block') {
+    tooltip.style.left = (e.clientX + 15) + 'px';
+    tooltip.style.top = (e.clientY + 15) + 'px';
+  }
+});

@@ -525,6 +525,11 @@ setTimeout(() => {
         return;
       }
       
+      // Extract player name from the dragged data to identify it
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = playerData;
+      const playerName = tempDiv.querySelector('.player-name')?.textContent;
+      
       // Remove previously placed player element marked for removal
       document.querySelectorAll('[data-being-moved="true"]').forEach(el => {
         // If the element is inside a position container
@@ -546,6 +551,18 @@ setTimeout(() => {
           el.remove();
         }
       });
+      
+      // If the player is coming from the bench, remove it from bench
+      if (!tempDiv.querySelector('[data-being-moved="true"]')) {
+        // Use a more reliable method to find the player in the bench
+        const allBenchPlayers = document.querySelectorAll('#bench .player-node');
+        allBenchPlayers.forEach(node => {
+          const nodeName = node.querySelector('.player-name')?.textContent;
+          if (nodeName === playerName) {
+            node.remove();
+          }
+        });
+      }
       
       // Clear the "empty" class and replace content
       position.classList.remove('empty');
@@ -580,6 +597,9 @@ setTimeout(() => {
                                position.getAttribute('data-position').includes('8') ? 'Forward 1' : 
                                position.getAttribute('data-position').includes('9') ? 'Forward 2' : 'Forward 3';
           position.className = positionClasses + ' empty';
+          
+          // Re-add the player to the bench when removed from the pitch
+          addPlayerBackToBench(droppedPlayer);
           
           // Show notification
           showNotification('Player removed from position', 'success');
@@ -644,6 +664,7 @@ style.textContent = `
     text-align: center;
     border: 2px solid #cc0000;
     animation: pulse 1.5s infinite;
+    margin-left: 18px;
   }
   
   @keyframes pulse {
@@ -998,6 +1019,11 @@ function initializeDragAndDrop() {
         return;
       }
       
+      // Extract player name from the dragged data to identify it
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = playerData;
+      const playerName = tempDiv.querySelector('.player-name')?.textContent;
+      
       // Remove previously placed player element marked for removal
       document.querySelectorAll('[data-being-moved="true"]').forEach(el => {
         // If the element is inside a position container
@@ -1019,6 +1045,18 @@ function initializeDragAndDrop() {
           el.remove();
         }
       });
+      
+      // If the player is coming from the bench, remove it from bench
+      if (!tempDiv.querySelector('[data-being-moved="true"]')) {
+        // Use a more reliable method to find the player in the bench
+        const allBenchPlayers = document.querySelectorAll('#bench .player-node');
+        allBenchPlayers.forEach(node => {
+          const nodeName = node.querySelector('.player-name')?.textContent;
+          if (nodeName === playerName) {
+            node.remove();
+          }
+        });
+      }
       
       // Clear the "empty" class and replace content
       position.classList.remove('empty');
@@ -1053,6 +1091,9 @@ function initializeDragAndDrop() {
                                position.getAttribute('data-position').includes('8') ? 'Forward 1' : 
                                position.getAttribute('data-position').includes('9') ? 'Forward 2' : 'Forward 3';
           position.className = positionClasses + ' empty';
+          
+          // Re-add the player to the bench when removed from the pitch
+          addPlayerBackToBench(droppedPlayer);
           
           // Show notification
           showNotification('Player removed from position', 'success');
@@ -1312,3 +1353,98 @@ formStyles.textContent = `
   }
 `;
 document.head.appendChild(formStyles);
+
+// Function to add player back to bench
+function addPlayerBackToBench(playerNode) {
+  // Clone the player node to avoid any reference issues
+  const playerClone = playerNode.cloneNode(true);
+  
+  // Remove the remove button if it exists
+  const removeBtn = playerClone.querySelector('.remove-btn');
+  if (removeBtn) {
+    removeBtn.remove();
+  }
+  
+  // Get player name to check if already on bench
+  const playerName = playerClone.querySelector('.player-name')?.textContent;
+  
+  // Check if player is already on bench to avoid duplicates
+  const existingOnBench = Array.from(document.querySelectorAll('#bench .player-node')).some(node => {
+    return node.querySelector('.player-name')?.textContent === playerName;
+  });
+  
+  // Only add to bench if not already there
+  if (!existingOnBench) {
+    // Add to bench
+    const bench = document.getElementById('bench');
+    bench.appendChild(playerClone);
+    
+    // Make the player draggable again
+    makeDraggable(playerClone);
+    
+    // Add event listeners for edit and delete buttons
+    const editBtn = playerClone.querySelector('.e-btn');
+    if (editBtn) {
+      editBtn.addEventListener('click', () => {
+        // Find the existing event handler and call it
+        const allEditBtns = document.querySelectorAll(".e-btn");
+        for (let i = 0; i < allEditBtns.length; i++) {
+          if (allEditBtns[i].closest('.player-node')?.querySelector('.player-name')?.textContent === playerName) {
+            allEditBtns[i].click();
+            break;
+          }
+        }
+      });
+    }
+    
+    const deleteBtn = playerClone.querySelector('.d-btn');
+    if (deleteBtn) {
+      deleteBtn.addEventListener('click', () => {
+        if (confirm(`Are you sure you want to remove ${playerName} from your team?`)) {
+          // Remove from localStorage
+          removePlayerFromLocalStorage(playerName);
+          
+          // Remove from UI
+          playerClone.remove();
+          
+          showNotification(`${playerName} has been removed from your team`, 'success');
+        }
+      });
+    }
+    
+    // Show notification
+    showNotification(`${playerName} returned to bench`, 'success');
+    
+    // Ensure all players in the bench have the correct drag-and-drop functionality
+    setTimeout(() => {
+      // Re-initialize draggable functionality for this player and check for delete buttons
+      const newBenchPlayers = document.querySelectorAll('#bench .player-node');
+      newBenchPlayers.forEach(player => {
+        if (!player.getAttribute('draggable')) {
+          makeDraggable(player);
+        }
+        
+        // Ensure the delete button has an event listener
+        const deleteBtn = player.querySelector('.d-btn');
+        if (deleteBtn && !deleteBtn._hasClickListener) {
+          const playerName = player.querySelector('.player-name')?.textContent;
+          
+          deleteBtn.addEventListener('click', () => {
+            if (confirm(`Are you sure you want to remove ${playerName} from your team?`)) {
+              // Remove from localStorage
+              removePlayerFromLocalStorage(playerName);
+              
+              // Remove from UI
+              player.remove();
+              
+              showNotification(`${playerName} has been removed from your team`, 'success');
+            }
+          });
+          
+          // Mark that we've added a listener to avoid duplicates
+          deleteBtn._hasClickListener = true;
+        }
+      });
+    }, 100);
+  }
+}

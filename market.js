@@ -26,10 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageInfo = document.getElementById('page-info');
     const notification = document.getElementById('notification');
     
+    const API_BASE_URL = window.location.origin;
+    
     // Load players from API
     async function loadPlayers() {
         try {
-            const response = await fetch('http://localhost:3000/players');
+            const response = await fetch(`${API_BASE_URL}/api/players`);
             if (!response.ok) {
                 throw new Error('Failed to fetch players');
             }

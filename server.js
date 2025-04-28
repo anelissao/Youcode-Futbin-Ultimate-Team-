@@ -4,23 +4,19 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Enable CORS for all origins
 app.use(cors());
 
 // Serve static files from the root directory
-app.use(express.static('./'));
+app.use(express.static(path.join(__dirname)));
 
 // API endpoint to get all players
-app.get('/api/players', (req, res) => {
+app.get('/api/players', async (req, res) => {
   try {
-    // Read the fifaPlayers.json file
     const playersFilePath = path.join(__dirname, 'assets', 'data', 'fifaPlayers.json');
-    const fileData = fs.readFileSync(playersFilePath, 'utf8');
+    const fileData = await fs.promises.readFile(playersFilePath, 'utf8');
     const playersData = JSON.parse(fileData);
-    
-    // Send the players array from the JSON file
     res.json(playersData.players);
   } catch (error) {
     console.error('Error reading players data:', error);
@@ -29,14 +25,13 @@ app.get('/api/players', (req, res) => {
 });
 
 // API endpoint to get a specific player by name
-app.get('/api/players/:name', (req, res) => {
+app.get('/api/players/:name', async (req, res) => {
   try {
     const playerName = req.params.name;
     const playersFilePath = path.join(__dirname, 'assets', 'data', 'fifaPlayers.json');
-    const fileData = fs.readFileSync(playersFilePath, 'utf8');
+    const fileData = await fs.promises.readFile(playersFilePath, 'utf8');
     const playersData = JSON.parse(fileData);
     
-    // Find the player by name (case insensitive)
     const player = playersData.players.find(
       p => p.NAME && p.NAME.toLowerCase() === playerName.toLowerCase()
     );
@@ -53,30 +48,27 @@ app.get('/api/players/:name', (req, res) => {
 });
 
 // API endpoint to search players
-app.get('/api/search', (req, res) => {
+app.get('/api/search', async (req, res) => {
   try {
     const { name, position, minRating, maxRating, limit = 20 } = req.query;
     const playersFilePath = path.join(__dirname, 'assets', 'data', 'fifaPlayers.json');
-    const fileData = fs.readFileSync(playersFilePath, 'utf8');
+    const fileData = await fs.promises.readFile(playersFilePath, 'utf8');
     const playersData = JSON.parse(fileData);
     
     let filteredPlayers = playersData.players;
     
-    // Filter by name if provided
     if (name) {
       filteredPlayers = filteredPlayers.filter(
         p => p.NAME && p.NAME.toLowerCase().includes(name.toLowerCase())
       );
     }
     
-    // Filter by position if provided
     if (position) {
       filteredPlayers = filteredPlayers.filter(
         p => p.POSITION && p.POSITION.includes(position)
       );
     }
     
-    // Filter by rating range if provided
     if (minRating) {
       filteredPlayers = filteredPlayers.filter(
         p => p.RATING && parseInt(p.RATING) >= parseInt(minRating)
@@ -89,9 +81,7 @@ app.get('/api/search', (req, res) => {
       );
     }
     
-    // Limit results
     const limitedResults = filteredPlayers.slice(0, parseInt(limit));
-    
     res.json(limitedResults);
   } catch (error) {
     console.error('Error searching players:', error);
@@ -99,8 +89,19 @@ app.get('/api/search', (req, res) => {
   }
 });
 
-// Start the server
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
+// Handle root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Only start the server in development
 if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
     console.log(`FIFA Players API server running on http://localhost:${PORT}`);
   });

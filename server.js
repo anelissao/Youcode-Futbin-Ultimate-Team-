@@ -5,8 +5,14 @@ const path = require('path');
 
 const app = express();
 
-// Enable CORS for all origins
-app.use(cors());
+// Enable CORS for all origins with specific options
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+}));
 
 // Serve static files from the root directory
 app.use(express.static(path.join(__dirname)));

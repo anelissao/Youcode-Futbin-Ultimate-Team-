@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageInfo = document.getElementById('page-info');
     const notification = document.getElementById('notification');
     
-    const API_BASE_URL = window.location.origin;
+    const API_BASE_URL = 'https://fifa-api-4r4uy0nc4-anouars-projects-0006f577.vercel.app';
     
     // Load players from API
     async function loadPlayers() {

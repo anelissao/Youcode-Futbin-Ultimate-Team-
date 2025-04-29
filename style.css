@@ -743,3 +743,161 @@ form button {
   transform: rotate(5deg);
   text-transform: uppercase;
 }
+
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Font Variables */
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Inter', sans-serif;
+    --font-numbers: 'Roboto', sans-serif;
+}
+
+/* Apply fonts to elements */
+body {
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.player-name {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.card-rating, .pace-val, .shooting-val, .passing-val, 
+.dribbling-val, .defending-val, .physical-val {
+    font-family: var(--font-numbers);
+    font-weight: 700;
+}
+
+.card-position {
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+button, .btn {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+input, select {
+    font-family: var(--font-secondary);
+}
+
+.notification {
+    font-family: var(--font-secondary);
+    font-weight: 500;
+}
+
+/* Additional Typography Styles */
+.page-title {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+}
+
+.section-title {
+    font-family: var(--font-primary);
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.filters-container label {
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.player-market-card {
+    font-family: var(--font-primary);
+}
+
+.player-market-card .player-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+    color: #222;
+}
+
+.player-market-card .card-rating {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.player-market-card .card-position {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #444;
+}
+
+.stats-container .stat-label {
+    font-family: var(--font-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.stats-container .stat-value {
+    font-family: var(--font-numbers);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.add-to-team-btn {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.notification {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+#page-info {
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.search-container input,
+.search-container select {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.search-container button {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}

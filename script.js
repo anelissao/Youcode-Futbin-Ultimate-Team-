@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Handle API player data for dynamic references if needed but don't add to bench directly
-fetch('http://localhost:3000/players')
+fetch('https://fifa-api-new.vercel.app/api/players')
 .then(response => response.json())
 .then(players => {
     console.log('Player data loaded from API for reference');

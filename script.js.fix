@@ -46,7 +46,7 @@ players.forEach((player, index) => {
 }
 setPos()
 
-fetch('http://localhost:3000/players')
+fetch('https://fifa-api-new.vercel.app/api/players')
 .then(response => response.json())
 .then(players => {
     console.log(players);

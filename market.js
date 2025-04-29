@@ -26,12 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageInfo = document.getElementById('page-info');
     const notification = document.getElementById('notification');
     
-    const API_BASE_URL = 'https://fifa-api-4r4uy0nc4-anouars-projects-0006f577.vercel.app';
-    
     // Load players from API
     async function loadPlayers() {
         try {
-            const response = await fetch(`${API_BASE_URL}/api/players`);
+            resultsGrid.innerHTML = '<div class="loading">Loading players...</div>';
+            
+            const response = await fetch('https://fifa-api-new.vercel.app/api/players');
             if (!response.ok) {
                 throw new Error('Failed to fetch players');
             }
@@ -51,72 +51,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     
-    // Display players on the current page
+    // Display players with pagination
     function displayPlayers() {
-        // Clear current results
         resultsGrid.innerHTML = '';
         
-        // Calculate start and end indices for current page
         const startIndex = (currentPage - 1) * playersPerPage;
         const endIndex = Math.min(startIndex + playersPerPage, filteredPlayers.length);
         
-        // Check if no results
         if (filteredPlayers.length === 0) {
-            resultsGrid.innerHTML = '<div class="no-results">No players found matching your criteria</div>';
+            resultsGrid.innerHTML = '<div class="no-results">No players found matching your criteria.</div>';
             return;
         }
         
-        // Get template
+        // Get the template
         const template = document.getElementById('player-card-template');
         
-        // Display players for current page
         for (let i = startIndex; i < endIndex; i++) {
             const player = filteredPlayers[i];
             
-            // Clone template
+            // Clone the template
             const playerCard = template.content.cloneNode(true);
             
             // Set player data
             playerCard.querySelector('.card-rating').textContent = player.RATING;
             playerCard.querySelector('.card-position').textContent = player.POSITION;
             
-            // Set club image
-            const clubImageElement = playerCard.querySelector('.club-image');
-            const clubImageValue = player.CLUB_IMAGE;
-            
-            if (clubImageValue === "No image found") {
-                // This player is retired/has no club - use the retired icon
+            // Handle club image
+            const clubImageElement = playerCard.querySelector('.card-club');
+            if (!player.CLUB_IMAGE || player.CLUB_IMAGE === "No club image found") {
                 clubImageElement.src = DEFAULT_CLUB_IMAGE;
-                clubImageElement.alt = 'Free Agent';
-                clubImageElement.title = '⚠️ FREE AGENT / RETIRED ⚠️\nThis player does not have a club';
+                clubImageElement.alt = 'Default Club';
+                clubImageElement.title = 'Club Image Not Available';
                 clubImageElement.classList.add('default-club-image');
-                
-                // Add a badge to make it visually clear
-                const badge = document.createElement('span');
-                badge.className = 'retired-badge';
-                badge.textContent = 'FREE AGENT';
-                badge.title = 'This player is retired or a free agent';
-                playerCard.querySelector('.player-market-card').appendChild(badge);
-                
-                console.log(`Player ${player.NAME} is using retired icon`);
             } else {
-                // Normal club image
-                clubImageElement.src = clubImageValue;
-                clubImageElement.alt = player.CLUB || 'Club';
+                clubImageElement.src = player.CLUB_IMAGE;
+                clubImageElement.alt = 'Club Image';
                 
-                // Handle image loading errors
+                // Handle club image loading errors
                 clubImageElement.onerror = function() {
-                    this.onerror = null; // Prevent infinite loops
-                    // If image fails to load but wasn't "No image found"
-                    this.src = MISSING_CLUB_IMAGE;
-                    this.classList.add('missing-club-image');
+                    this.onerror = null;
+                    this.src = DEFAULT_CLUB_IMAGE;
+                    this.classList.add('default-club-image');
                     this.title = 'Club Image Unavailable';
                 };
             }
             
-            // Set player image
+            // Handle player image
             const playerImageElement = playerCard.querySelector('.player-image');
-            if (player.IMAGE === "No image found") {
+            if (!player.IMAGE || player.IMAGE === "No image found") {
                 playerImageElement.src = DEFAULT_PLAYER_IMAGE;
                 playerImageElement.alt = player.NAME + ' (No Image)';
                 playerImageElement.title = 'No Image Available';
@@ -204,96 +186,67 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update pagination controls
     function updatePagination() {
         const totalPages = Math.ceil(filteredPlayers.length / playersPerPage);
+        pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
         
-        // Update page info
-        pageInfo.textContent = `Page ${currentPage} of ${totalPages || 1}`;
-        
-        // Enable/disable prev button
-        prevPageBtn.disabled = currentPage <= 1;
-        
-        // Enable/disable next button
-        nextPageBtn.disabled = currentPage >= totalPages;
+        prevPageBtn.disabled = currentPage === 1;
+        nextPageBtn.disabled = currentPage === totalPages;
     }
     
-    // Add player to user's team
+    // Add player to team
     function addPlayerToTeam(player) {
-        // Create a copy of the player object
-        const playerToAdd = {...player};
-        
-        // Get current team from localStorage
-        let myTeam = JSON.parse(localStorage.getItem('myTeam')) || [];
-        
-        // Check if player is already in team
-        const isPlayerInTeam = myTeam.some(p => p.NAME === playerToAdd.NAME);
-        
-        if (isPlayerInTeam) {
-            showNotification(`${playerToAdd.NAME} is already in your team!`, 'warning');
-            return;
+        try {
+            let myTeam = JSON.parse(localStorage.getItem('myTeam')) || [];
+            
+            // Check if player is already in team
+            if (myTeam.some(p => p.NAME === player.NAME)) {
+                showNotification(`${player.NAME} is already in your team!`, 'warning');
+                return;
+            }
+            
+            // Add timestamp for sorting
+            player.ADDED_AT = Date.now();
+            
+            myTeam.push(player);
+            localStorage.setItem('myTeam', JSON.stringify(myTeam));
+            
+            showNotification(`${player.NAME} added to your team!`, 'success');
+        } catch (error) {
+            showNotification('Error adding player to team', 'error');
+            console.error('Error adding player to team:', error);
         }
-        
-        // Check if team has reached the maximum of 25 players
-        if (myTeam.length >= 25) {
-            showNotification(`Your bench is full! Maximum 25 players allowed. Please remove some players first.`, 'error');
-            return;
-        }
-        
-        // Handle case where player has "No image found"
-        if (playerToAdd.IMAGE === "No image found") {
-            playerToAdd.IMAGE = DEFAULT_PLAYER_IMAGE;
-        }
-        
-        // Handle case where club is "No image found" (retired player)
-        if (playerToAdd.CLUB_IMAGE === "No image found") {
-            playerToAdd.CLUB_IMAGE = DEFAULT_CLUB_IMAGE;
-            // Add a flag to identify this is a retired player
-            playerToAdd.IS_RETIRED = true;
-        }
-        
-        // Add player to team
-        myTeam.push(playerToAdd);
-        
-        // Save updated team to localStorage
-        localStorage.setItem('myTeam', JSON.stringify(myTeam));
-        
-        // Show success notification
-        showNotification(`${playerToAdd.NAME} added to your team!`, 'success');
     }
     
     // Show notification
     function showNotification(message, type = 'info') {
         notification.textContent = message;
         notification.className = `notification ${type}`;
-        
-        // Show notification
         notification.classList.remove('hidden');
         
-        // Hide notification after 3 seconds
         setTimeout(() => {
             notification.classList.add('hidden');
         }, 3000);
     }
     
-    // Event listeners
+    // Event Listeners
     searchBtn.addEventListener('click', filterPlayers);
-    searchInput.addEventListener('keyup', e => {
-        if (e.key === 'Enter') filterPlayers();
+    searchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') {
+            filterPlayers();
+        }
     });
     
     applyFiltersBtn.addEventListener('click', filterPlayers);
     
     resetFiltersBtn.addEventListener('click', () => {
-        // Reset form fields
         searchInput.value = '';
         positionFilter.value = '';
         minRatingFilter.value = '70';
         maxRatingFilter.value = '99';
+        sortSelect.value = 'rating-desc';
         
-        // Show all players
         filteredPlayers = [...allPlayers];
         currentPage = 1;
-        
-        // Re-sort and update display
-        sortPlayers(sortSelect.value);
+        sortPlayers('rating-desc');
         updatePagination();
     });
     

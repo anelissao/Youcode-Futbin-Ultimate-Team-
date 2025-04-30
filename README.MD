@@ -2,6 +2,10 @@
 
 This project is a web application that allows users to explore and manage a virtual football team using player data scraped from the Futbin website. The application is still in progress and aims to provide a comprehensive platform for football enthusiasts to interact with player statistics and build their ultimate team.
 
+## Live Preview
+
+You can view a live preview of the project at the following URL: [https://futbin-scrapped-data.vercel.app/index.html](https://futbin-scrapped-data.vercel.app/index.html). 
+
 ## Features
 
 - **Player Data**: Player statistics and information are scraped from the Futbin website.
